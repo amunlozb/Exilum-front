@@ -29,20 +29,21 @@ function App() {
     });
   });
 
+
+  // return to the top when route changes
   useEffect(() => {
     document.querySelector('html').style.scrollBehavior = 'auto'
     window.scroll({ top: 0 })
     document.querySelector('html').style.scrollBehavior = ''
-  }, [location.pathname]); // triggered on route change
-
+  }, [location.pathname]); // trigger
   return (
     <>
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route path="/investments" element={<Investments />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/investments" element={<Investments />} />
       </Routes>
     </>
   );
