@@ -98,7 +98,7 @@ function Header() {
               </li>
 
               <li className="px-3">
-                <DarkThemeToggle />
+                <DarkThemeToggle className="focus:ring-0" />
               </li>
             </ul>
           </nav>
