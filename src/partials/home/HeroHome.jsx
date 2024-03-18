@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Button } from "flowbite-react";
-import pantheon from "../images/pantheon.png";
+import pantheon from "../../images/pantheon.png";
 
 function HeroHome() {
   

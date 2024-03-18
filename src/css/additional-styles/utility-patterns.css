@@ -87,3 +87,9 @@
 .text-pretty {
     text-wrap: pretty;
 }
+
+/* Highlight */
+
+.highlight {
+    @apply bg-yellow-300;
+}

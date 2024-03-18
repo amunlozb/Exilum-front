@@ -1,11 +1,12 @@
 import React from 'react';
 
-import Header from '../partials/Header';
-import Footer from '../partials/Footer';
 import { Flowbite } from 'flowbite-react';
 
-import InvestmentGroup from '../partials/InvestmentGroup';
+import Header from '../partials/Header';
+import Footer from '../partials/Footer';
 import Newsletter from '../partials/Newsletter';
+
+import InvestmentGroup from '../partials/investments/InvestmentGroup';
 
 function Investments() {
     return (
@@ -18,7 +19,7 @@ function Investments() {
         {/*  Page content */}
         <main className="flex-grow">
           {/*  Page sections */}
-          <InvestmentGroup title={'This is a title'} hasSearch={true} />
+          <InvestmentGroup title={'This is a title'} hasSearch={true} content={['Hola', 'Holaaa', 'Holaaaaaa', 'Bar']} />
           <Newsletter />
         </main>
 
