@@ -1,11 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Header from '../partials/Header';
 import { Flowbite } from "flowbite-react";
 import Footer from '../partials/Footer';
 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+
+
+
 function SignUp() {
+  const [email, setEmail] = useState("");
+
+  const [password, setPassword] = useState("");
+
+  const handleSignUp = (e) => {
+
+    e.preventDefault();
+
+    createUserWithEmailAndPassword(auth, email, password)
+
+      .then((userCredential) => {
+
+        // Signed in 
+
+        const user = userCredential.user;
+
+        // Redirect to home page
+        window.location.href = "/";
+
+      })
+
+      .catch((error) => {
+
+        const errorCode = error.code;
+
+        const errorMessage = error.message;
+
+        if (errorCode === 'auth/weak-password') {
+            
+            alert('The password is too weak. The password should be at least 6 characters long.');
+  
+          } else {
+  
+            alert(errorMessage);
+  
+          }
+      });
+
+    };
+
+
+
   return (
     <Flowbite>
     <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900">
@@ -27,28 +74,22 @@ function SignUp() {
 
               {/* Form */}
               <div className="max-w-sm mx-auto">
-                <form>
-                  <div className="flex flex-wrap -mx-3 mb-4">
-                    <div className="w-full px-3">
-                      <label className="block text-gray-800 dark:text-gray-300 text-sm font-medium mb-1" htmlFor="name">Name <span className="text-red-600">*</span></label>
-                      <input id="name" type="text" className="form-input w-full text-gray-800 " placeholder="Enter your name" required />
-                    </div>
-                  </div>
+                <form onSubmit={handleSignUp}>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className="block text-gray-800 dark:text-gray-300 text-sm font-medium mb-1" htmlFor="email">Email <span className="text-red-600">*</span></label>
-                      <input id="email" type="email" className="form-input w-full text-gray-800 " placeholder="Enter your email address" required />
+                      <input id="email" type="email" className="form-input w-full text-gray-800 " placeholder="Enter your email address" required onChange={(e) => setEmail(e.target.value)} />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className="block text-gray-800 dark:text-gray-300 text-sm font-medium mb-1" htmlFor="password">Password <span className="text-red-600">*</span></label>
-                      <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" required />
+                      <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" required value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">Sign up</button>
+                      <button type="submit" className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">Sign up</button>
                     </div>
                   </div>
                   <div className="text-sm text-gray-500 text-center mt-3">
@@ -60,6 +101,8 @@ function SignUp() {
                   <div className="text-gray-600 italic">Or</div>
                   <div className="border-t border-gray-300 flex-grow ml-3" aria-hidden="true"></div>
                 </div>
+
+                {/* Alternative Sign Ups */}
                 <form>
                   <div className="flex flex-wrap -mx-3 mb-3">
                     <div className="w-full px-3">
