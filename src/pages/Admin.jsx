@@ -2,7 +2,6 @@ import React from "react";
 
 import AdminHeader from "../partials/admin/AdminHeader";
 import FeaturesHome from "../partials/home/Features";
-import FeaturesBlocks from "../partials/home/FeaturesBlocks";
 
 import Footer from "../partials/Footer";
 import { Flowbite } from "flowbite-react";

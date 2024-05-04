@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DarkThemeToggle } from "flowbite-react";
 
-function Header() {
+function AdminHeader() {
   const [top, setTop] = useState(true);
 
   // detect whether user has scrolled the page down by 10px
@@ -92,4 +92,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default AdminHeader;

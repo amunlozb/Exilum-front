@@ -16,7 +16,7 @@ import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
 import Investments from './pages/Investments';
 import Admin from './pages/Admin';
-
+import isAdmin from './hooks/isAdmin';
 import { auth } from "./firebase";
 
 function App() {  
@@ -25,9 +25,17 @@ function App() {
   if (user) {
     console.log("USER IS LOGGED IN");
     console.log(user.email);
+
+    isAdmin().then((isAdmin) => {
+      console.log("Is Admin:", isAdmin);
+    }).catch((error) => {
+      console.error("Error checking admin status:", error);
+    });
   } else {
     console.log("USER IS NOT LOGGED IN");
   }
+
+
 });
 
   const location = useLocation();
