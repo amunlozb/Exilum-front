@@ -11,7 +11,8 @@ export default async function isAdmin() {
 
     const token = await user.getIdToken();
 
-    const response = await fetch('http://localhost:8080/api/getAuthorities', {
+    // @TODO: change when deployed
+    const response = await fetch('http://localhost:8080/api/getRoles', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
