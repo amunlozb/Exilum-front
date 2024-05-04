@@ -10,7 +10,11 @@ import Footer from '../partials/Footer';
 import { Flowbite } from 'flowbite-react';
 
 
+import { auth } from "../firebase";
+
+
 function Home() {
+
   return (
     // Wrap everything in Flowbite so dark mode works
     <Flowbite>

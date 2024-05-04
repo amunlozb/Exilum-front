@@ -17,7 +17,18 @@ import ResetPassword from './pages/ResetPassword';
 import Investments from './pages/Investments';
 import Admin from './pages/Admin';
 
-function App() {
+import { auth } from "./firebase";
+
+function App() {  
+  
+  auth.onAuthStateChanged((user) => {
+  if (user) {
+    console.log("USER IS LOGGED IN");
+    console.log(user.email);
+  } else {
+    console.log("USER IS NOT LOGGED IN");
+  }
+});
 
   const location = useLocation();
 

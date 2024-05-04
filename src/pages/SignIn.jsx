@@ -1,11 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Header from "../partials/Header";
 import { Flowbite } from "flowbite-react";
 import Footer from '../partials/Footer';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 
 function SignIn() {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const auth = getAuth();
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // Redirect to home page
+        console.log("SIGNING IN SUCCESFULLY");
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.log("SIGNING IN FAILED");
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        switch (errorCode) {
+          case "auth/wrong-password":
+            alert("Wrong password.");
+            break;
+          case "auth/invalid-credential":
+            alert("Invalid credentials.");
+            break;
+          case "auth/user-not-found":
+            alert("User not found.");
+            break;
+          default:
+            alert(errorMessage);
+            break;
+        }
+
+      });
+  }
+
   return (
     <Flowbite>
       <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900">
@@ -26,7 +67,7 @@ function SignIn() {
 
                 {/* Form */}
                 <div className="max-w-sm mx-auto">
-                  <form>
+                  <form onSubmit={handleSignIn}>
                     <div className="flex flex-wrap -mx-3 mb-4">
                       <div className="w-full px-3">
                         <label
@@ -40,7 +81,8 @@ function SignIn() {
                           type="email"
                           className="form-input w-full text-gray-800 dark:text-gray-300"
                           placeholder="Enter your email address"
-                          required
+                          required 
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
                     </div>
@@ -66,6 +108,7 @@ function SignIn() {
                           className="form-input w-full text-gray-800 dark:text-gray-300"
                           placeholder="Enter your password"
                           required
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                       </div>
                     </div>
