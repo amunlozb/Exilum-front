@@ -13,8 +13,6 @@ import isAdmin from '../hooks/isAdmin';
 
 function Home() {
   const [isAdminUser, setIsAdminUser] = useState(false);
-  
-  console.log(isAdmin());
 
   useEffect(() => {
     isAdmin().then(setIsAdminUser).catch(console.error);

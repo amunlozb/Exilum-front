@@ -17,7 +17,7 @@ export default async function isAdmin() {
       },
     });
 
-    console.log(token);
+    console.log("TOKEN:" + token);
 
     if (!response.ok) {
       console.error(`HTTP error! status: ${response.status}`);
@@ -25,7 +25,7 @@ export default async function isAdmin() {
     }
 
     const data = await response.json();
-    console.log(data);
+    console.log("ROLES RESPONSE:" + data);
 
     const isAdmin = data.some(obj => obj.authority === 'ADMIN');
     return isAdmin;
