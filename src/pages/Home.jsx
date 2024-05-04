@@ -12,11 +12,6 @@ import { auth } from "../firebase";
 import isAdmin from '../hooks/isAdmin';
 
 function Home() {
-  const [isAdminUser, setIsAdminUser] = useState(false);
-
-  useEffect(() => {
-    isAdmin().then(setIsAdminUser).catch(console.error);
-  }, []);
 
   return (
     // Wrap everything in Flowbite so dark mode works

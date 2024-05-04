@@ -26,7 +26,8 @@ export default async function isAdmin() {
     }
 
     const data = await response.json();
-    console.log("ROLES RESPONSE:" + data);
+    console.log("ROLES RESPONSE:");
+    console.log(data);
 
     const isAdmin = data.some(obj => obj.authority === 'ADMIN');
     return isAdmin;
