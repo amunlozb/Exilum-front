@@ -23,8 +23,6 @@ function App() {
   
   auth.onAuthStateChanged((user) => {
   if (user) {
-    console.log("USER IS LOGGED IN");
-    console.log(user.email);
 
     isAdmin().then((isAdmin) => {
       console.log("Is Admin:", isAdmin);
@@ -34,9 +32,7 @@ function App() {
   } else {
     console.log("USER IS NOT LOGGED IN");
   }
-
-
-});
+  });
 
   const location = useLocation();
 

@@ -10,6 +10,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "aos": "^3.0.0-beta.6",
+    "axios": "^1.6.8",
     "firebase": "^10.11.0",
     "flowbite-react": "^0.7.2",
     "postcss-nesting": "^12.1.0",

@@ -1,38 +1,39 @@
 import { getAuth } from "firebase/auth";
-import firebase from "firebase/compat/app";
 
 export default async function isAdmin() {
-  try {
-    const user = getAuth().currentUser;
+  
 
-    if (!user) {
-      return "No user is logged in.";
-    }
+  // try {
+  //   const user = getAuth().currentUser;
 
-    const token = await user.getIdToken();
+  //   if (!user) {
+  //     return "No user is logged in.";
+  //   }
 
-    // @TODO: change when deployed
-    const response = await fetch('http://localhost:8080/api/getRoles', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  //   const token = await user.getIdToken();
 
-    console.log("TOKEN:" + token);
+  //   // @TODO: change when deployed
+  //   const response = await fetch('http://localhost:8080/api/getRoles', {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
 
-    if (!response.ok) {
-      console.error(`HTTP error! status: ${response.status}`);
-      return false;
-    }
+  //   console.log("TOKEN:" + token);
 
-    const data = await response.json();
-    console.log("ROLES RESPONSE:");
-    console.log(data);
+  //   if (!response.ok) {
+  //     console.error(`HTTP error! status: ${response.status}`);
+  //     return false;
+  //   }
 
-    const isAdmin = data.some(obj => obj.authority === 'ADMIN');
-    return isAdmin;
-  } catch (error) {
-    console.error("An error occurred while checking admin status:", error);
-    return false;
-  }
+  //   const data = await response.json();
+  //   console.log("ROLES RESPONSE:");
+  //   console.log(data);
+
+  //   const isAdmin = data.some(obj => obj.authority === 'ADMIN');
+  //   return isAdmin;
+  // } catch (error) {
+  //   console.error("An error occurred while checking admin status:", error);
+  //   return false;
+  // }
 }
