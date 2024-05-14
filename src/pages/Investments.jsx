@@ -26,9 +26,7 @@ function Investments() {
 
         {/*  Page content */}
         <main className="flex flex-col mt-20 gap-10 items-center text-center"> {/* Add text-center class */}
-          {/*  Page sections */}
-          <InvestmentGroup title={'This is a title'} hasSearch={true} content={['Hola', 'Holaaa', 'Holaaaaaa', 'Bar']} />
-          <InvestmentGroup
+          {/*  Page sections */}          <InvestmentGroup
         title="This is a title"
         hasSearch={true}
         content={sampleContent}
