@@ -30,7 +30,11 @@ function InvestmentGroup({ title, hasSearch, content }) {
                         } border-2 border-red-700 inline-block`}
                         title={item.text} // Show text as tooltip 
                     >
-                        <img src={item.imageSrc} alt={item.alt} />
+                        {/* Use CSS for hover tooltip */}
+                        <div className="tooltip flex flex-wrap">
+                            <img src={item.imageSrc} alt={item.alt} />
+                            <span className="tooltiptext">{item.alt}</span>
+                        </div>
                     </div>
                 ))}
             </div>
