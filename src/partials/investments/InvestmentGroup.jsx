@@ -18,7 +18,7 @@ function InvestmentGroup( {title, hasSearch, content}) {
     ))}
 
     return (
-        <div className="text-center relative pt-32 pb-12 md:pt-40 md:pb-20">
+        <div className="text-center w-fit pb-12 md:pt-40 md:pb-20 bg-slate-200 border-4 border-black">
             <h1>{title}</h1>
             
             {/* Conditionally show Search */}
