@@ -6,8 +6,7 @@ import { Flowbite } from "flowbite-react";
 import Footer from "../partials/Footer";
 import {
   getAuth,
-  signInWithEmailAndPassword,
-  signInWithCustomToken,
+  signInWithEmailAndPassword
 } from "firebase/auth";
 
 import axios from "axios";
@@ -52,24 +51,7 @@ function SignIn() {
       console.log(error);
     }
   };
-  // Redirect to home page
-  // console.log("SIGNING IN SUCCESSFULLY");
-  // window.location.href = "/";
-
-  // switch (errorCode) {
-  //   case "auth/wrong-password":
-  //     alert("Wrong password.");
-  //     break;
-  //   case "auth/invalid-credential":
-  //     alert("Invalid credentials.");
-  //     break;
-  //   case "auth/user-not-found":
-  //     alert("User not found.");
-  //     break;
-  //   default:
-  //     alert(errorMessage);
-  //     break;
-  // }
+  
 
   return (
     <Flowbite>
