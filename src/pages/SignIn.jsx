@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 
 import Header from "../partials/Header";
 import { Flowbite } from "flowbite-react";
-import Footer from '../partials/Footer';
-import { getAuth, signInWithEmailAndPassword, signInWithCustomToken } from "firebase/auth";
-
+import Footer from "../partials/Footer";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithCustomToken,
+} from "firebase/auth";
 
 import axios from "axios";
 
-
 function SignIn() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const auth = getAuth();
@@ -20,55 +21,55 @@ function SignIn() {
     e.preventDefault();
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      // Get the user token (to use it later in the POST request)
       const user = userCredential.user;
-      // Get the token from your backend
-      const tokenResponse = await axios.post(`http://localhost:8080/admin/roles/${user.uid}`, '"ADMIN"', {
-        headers: {
-          "Content-Type": "application/json",
+      const userToken = await user.getIdToken();
+
+      // Send POST request to endpoint -> it returns HTTP-Only cookie with session token
+      await axios.post(
+        "http://localhost:8080/api/auth/sessionLogin",
+        {
+          idToken: userToken,
         },
-      });
-      // Sign in with the custom token
-      signInWithCustomToken(auth, tokenResponse.data);
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       // Redirect to home page
       console.log("SIGNING IN SUCCESSFULLY");
       window.location.href = "/";
     } catch (error) {
       console.log("SIGNING IN FAILED");
-      const errorCode = error.code;
-      const errorMessage = error.message;
-
-      switch (errorCode) {
-        case "auth/wrong-password":
-          alert("Wrong password.");
-          break;
-        case "auth/invalid-credential":
-          alert("Invalid credentials.");
-          break;
-        case "auth/user-not-found":
-          alert("User not found.");
-          break;
-        default:
-          alert(errorMessage);
-          break;
-      }
+      console.log(error);
     }
   };
+  // Redirect to home page
+  // console.log("SIGNING IN SUCCESSFULLY");
+  // window.location.href = "/";
 
-  const updateUserRole = async (uid) => {
-    try {
-      // Make an API request to your backend to update user role
-      await axios.post(`http://localhost:8080/admin/roles/${user.uid}`, '"ADMIN"', {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log("User role updated successfully");
-    } catch (error) {
-      console.error("Failed to update user role:", error);
-    }
-  };
-
+  // switch (errorCode) {
+  //   case "auth/wrong-password":
+  //     alert("Wrong password.");
+  //     break;
+  //   case "auth/invalid-credential":
+  //     alert("Invalid credentials.");
+  //     break;
+  //   case "auth/user-not-found":
+  //     alert("User not found.");
+  //     break;
+  //   default:
+  //     alert(errorMessage);
+  //     break;
+  // }
 
   return (
     <Flowbite>
@@ -104,7 +105,7 @@ function SignIn() {
                           type="email"
                           className="form-input w-full text-gray-800 dark:text-gray-300"
                           placeholder="Enter your email address"
-                          required 
+                          required
                           onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
