@@ -89,21 +89,24 @@
 }
 
 /* Highlight and Selection */
+.item {
+    @apply rounded m-1
+}
+
 .darkened {
-    opacity: 0.5;
+    opacity: 0.4;
     transition: all 0.3s ease;
 }
 
 .item.highlight {
-    border: 2px solid yellow; 
+    border: 2px solid #D43B94; 
     opacity: 1; 
 }
 
 .item.selected {
-    border: 2px solid blue; 
-    background-color: lightblue;
-    opacity: 0.8 
-}
+    background-color: #93D798;
+    @apply rounded
+}   
 
 /* Tooltip */
 
@@ -147,7 +150,6 @@
     width: 100%;
     max-width: 400px;
     padding: 10px 20px;
-    border: 2px solid #ddd;
     border-radius: 25px;
     font-size: 16px;
     outline: none;
@@ -159,6 +161,6 @@
 }
 
 .search-input:focus {
-    border-color: #007bff;
+    border-color: #D43B94;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
 }

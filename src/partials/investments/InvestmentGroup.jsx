@@ -25,11 +25,16 @@ function InvestmentGroup({ title, hasSearch, content }) {
     };
 
     return (
-        <div className="text-center w-fit p-10 md_ bg-gray-400 rounded-xl border-4 border-black">
+        <div className="text-center w-fit p-10 bg-gray-200 rounded">
             <h1>{title}</h1>
 
-            {/* Conditionally show Search (depends on the hasSearch prop)*/}
+            {/* Conditionally show Search */}
             {hasSearch && <SearchBar onSearchChange={handleSearchChange} />}
+
+            {/* Counter for selected items */}
+            <div className="selected-counter mb-3">
+                {`${selectedItems.length}/4 selected`}
+            </div>
 
             {/* Wrap content in a flex div */}
             <div className="flex-wrap">
