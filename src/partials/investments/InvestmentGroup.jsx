@@ -3,40 +3,64 @@ import SearchBar from "./SearchBar";
 
 function InvestmentGroup({ title, hasSearch, content }) {
     const [searchTerm, setSearchTerm] = useState("");
+    const [selectedItems, setSelectedItems] = useState([]);
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
     };
 
+    const handleItemClick = (index) => {
+        setSelectedItems((prevSelectedItems) => {
+            if (prevSelectedItems.includes(index)) {
+                // Deselect item
+                return prevSelectedItems.filter((i) => i !== index);
+            } else if (prevSelectedItems.length < 4) {
+                // Select item if less than 4 are selected
+                return [...prevSelectedItems, index];
+            } else {
+                // If 4 items are already selected, do nothing
+                return prevSelectedItems;
+            }
+        });
+    };
+
     return (
-        <div className="text-center w-fit p-10 md_  bg-green-200 border-4 border-black">
+        <div className="text-center w-fit p-10 md_ bg-gray-400 rounded-xl border-4 border-black">
             <h1>{title}</h1>
 
-            {/* Conditionally show Search */}
+            {/* Conditionally show Search (depends on the hasSearch prop)*/}
             {hasSearch && <SearchBar onSearchChange={handleSearchChange} />}
 
             {/* Wrap content in a flex div */}
             <div className="flex-wrap">
                 {/* Map and render content */}
-                {content.map((item, index) => (
-                    // If the item matches the search, add the "highlight" class to it, otherwise, just render the item
-                    <div
-                        key={index}
-                        className={`item ${
-                            searchTerm &&
-                            item.alt.toLowerCase().includes(searchTerm.toLowerCase())
-                                ? "highlight"
-                                : ""
-                        } border-2 border-red-700 inline-block`}
-                        title={item.text} // Show text as tooltip 
-                    >
-                        {/* Use CSS for hover tooltip */}
-                        <div className="tooltip flex flex-wrap">
-                            <img src={item.imageSrc} alt={item.alt} />
-                            <span className="tooltiptext">{item.alt}</span>
+                {content.map((item, index) => {
+                    const isHighlighted = searchTerm &&
+                        item.alt.toLowerCase().includes(searchTerm.toLowerCase());
+                    const isSelected = selectedItems.includes(index);
+                    const isDarkened = searchTerm && !isHighlighted && !isSelected;
+
+                    return (
+                        <div
+                            key={index}
+                            className={`item ${
+                                isHighlighted ? "highlight" : ""
+                            } ${
+                                isSelected ? "selected" : ""
+                            } ${
+                                isDarkened ? "darkened" : ""
+                            } border-2 border-black inline-block`}
+                            title={item.text} // Show text as tooltip 
+                            onClick={() => handleItemClick(index)} // Add click handler
+                        >
+                            {/* hover tooltip */}
+                            <div className="tooltip flex flex-wrap">
+                                <img src={item.imageSrc} alt={item.alt} />
+                                <span className="tooltiptext">{item.alt}</span>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );
