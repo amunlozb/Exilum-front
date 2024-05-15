@@ -56,7 +56,7 @@ function InvestmentGroup({ title, hasSearch, content }) {
                                 isDarkened ? "darkened" : ""
                             } border-2 border-black dark:border-gray-200 inline-block`}
                             title={item.text} // Show text as tooltip 
-                            onClick={() => handleItemClick(index)} // Add click handler
+                            onMouseDown={() => handleItemClick(index)} // Add click handler
                         >
                             {/* hover tooltip */}
                             <div className="tooltip flex flex-wrap">

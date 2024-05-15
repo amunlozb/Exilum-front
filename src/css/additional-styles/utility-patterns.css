@@ -104,8 +104,7 @@
 }
 
 .item.selected {
-    background-color: #93D798;
-    @apply rounded
+    @apply bg-emerald-300 rounded dark:bg-green-500
 }   
 
 /* Tooltip */
