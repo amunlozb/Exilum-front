@@ -25,14 +25,14 @@ function InvestmentGroup({ title, hasSearch, content }) {
     };
 
     return (
-        <div className="text-center w-fit p-10 bg-gray-200 rounded">
-            <h1>{title}</h1>
+        <div className="p-6 bg-white dark:bg-gray-900 rounded border-2 border-gray-300 dark:border-gray-700 py-10 px-8 md:py-16 md:px-12 shadow-2xl overflow-hidden">
+            <h1 className="mb-6 font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-3xl dark:text-white">{title}</h1>
 
             {/* Conditionally show Search */}
             {hasSearch && <SearchBar onSearchChange={handleSearchChange} />}
 
             {/* Counter for selected items */}
-            <div className="selected-counter mb-3">
+            <div className="selected-counter mb-3 dark:text-white">
                 {`${selectedItems.length}/4 selected`}
             </div>
 
@@ -54,7 +54,7 @@ function InvestmentGroup({ title, hasSearch, content }) {
                                 isSelected ? "selected" : ""
                             } ${
                                 isDarkened ? "darkened" : ""
-                            } border-2 border-black inline-block`}
+                            } border-2 border-black dark:border-gray-200 inline-block`}
                             title={item.text} // Show text as tooltip 
                             onClick={() => handleItemClick(index)} // Add click handler
                         >
