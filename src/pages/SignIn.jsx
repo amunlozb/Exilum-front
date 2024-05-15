@@ -37,15 +37,16 @@ function SignIn() {
           idToken: userToken,
         },
         {
+          withCredentials: true,
           headers: {
-            "Content-Type": "application/json",
+        "Content-Type": "application/json",
           },
         }
       );
 
       // Redirect to home page
       console.log("SIGNING IN SUCCESSFULLY");
-      window.location.href = "/";
+      // window.location.href = "/";
     } catch (error) {
       console.log("SIGNING IN FAILED");
       console.log(error);
