@@ -184,12 +184,12 @@ function Investments() {
         <main className="flex flex-col mt-36 gap-10 items-center text-center">
           {/*  Page sections */}{" "}
           <InvestmentGroup
-            title="This is a title"
+            title="Scarabs"
             hasSearch={true}
             content={sampleContent}
           />
           <InvestmentGroup
-            title="This is a title"
+            title="Delirium Orbs"
             hasSearch={true}
             content={sampleContent}
           />

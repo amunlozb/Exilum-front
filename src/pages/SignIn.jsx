@@ -86,7 +86,7 @@ function SignIn() {
                         <input
                           id="email"
                           type="email"
-                          className="form-input w-full text-gray-800 dark:text-gray-300"
+                          className="form-input w-full text-gray-800"
                           placeholder="Enter your email address"
                           required
                           onChange={(e) => setEmail(e.target.value)}
@@ -112,7 +112,7 @@ function SignIn() {
                         <input
                           id="password"
                           type="password"
-                          className="form-input w-full text-gray-800 dark:text-gray-300"
+                          className="form-input w-full text-gray-800"
                           placeholder="Enter your password"
                           required
                           onChange={(e) => setPassword(e.target.value)}
