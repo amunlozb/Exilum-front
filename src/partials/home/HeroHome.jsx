@@ -36,12 +36,12 @@ function HeroHome() {
                 data-aos-delay="300"
               >
                 <div>
-                  <Button gradientDuoTone="purpleToPink" size="lg">
-                    Try it now for free{" "}
+                  <Button gradientDuoTone="purpleToPink" size="lg" href="/signup">
+                    Try it now for free
                   </Button>
                 </div>
                 <div>
-                  <Button gradientDuoTone="purpleToPink" outline size="lg">
+                  <Button gradientDuoTone="purpleToPink" outline size="lg" href="https://github.com/amunlozb/Exilum-front">
                     Github Repo
                   </Button>
                 </div>
