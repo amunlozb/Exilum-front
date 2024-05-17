@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+// OptionInvestmentGroup.jsx
+
+import React, { useState, useCallback, useEffect } from "react";
 import SearchBar from "./SearchBar";
 
-function OptionInvestmentGroup({ title, hasSearch, limit }) {
-
+function OptionInvestmentGroup({ title, hasSearch, content, limit, onSelectionChange }) {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedItems, setSelectedItems] = useState([]);
 
@@ -25,39 +26,31 @@ function OptionInvestmentGroup({ title, hasSearch, limit }) {
         });
     };
 
-    const sampleData = [
-        { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
-        { name: "Breach", description: "Map contains an additional Breach", price: 6 },
-        { name: "Delirium", description: "Map contains an additional Delirium Mirror", price: 6 },
-        { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
-        { name: "Breach", description: "Map contains an additional Breach", price: 6 },
-        { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
-        { name: "Breach", description: "Map contains an additional Breach", price: 6 },
-        { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
-        { name: "Breach", description: "Map contains an additional Breach", price: 6 },
-        { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
-        { name: "Breach", description: "Map contains an additional Breach", price: 6 }
-    ];
+    // Function to notify parent about selection change
+    const notifySelectionChange = useCallback(() => {
+        onSelectionChange(selectedItems.map(index => content[index].name)); // Pass the name attribute
+    }, [selectedItems, content, onSelectionChange]);
+
+    // Update the selection change effect
+    useEffect(() => {
+        notifySelectionChange();
+    }, [selectedItems]); // Re-run when selectedItems changes
 
     return (
-        <div className=" lg:w-5/12 w-full bg-white dark:bg-gray-900 rounded border-2 border-gray-300 dark:border-gray-700 py-10 px-8 md:py-16 md:px-12 shadow-2xl overflow-hidden">
+        <div className="lg:w-5/12 w-full bg-white dark:bg-gray-900 rounded border-2 border-gray-300 dark:border-gray-700 py-10 px-8 md:py-16 md:px-12 shadow-2xl overflow-hidden">
             <h1 className="mb-6 font-extrabold leading-none tracking-tight text-gray-900 text-3xl lg:text-3xl dark:text-white">
                 {title}
             </h1>
 
-            {/* Conditionally show Search */}
             {hasSearch && <SearchBar onSearchChange={handleSearchChange} />}
 
-            {/* Counter for selected items */}
             <div className="selected-counter mb-3 dark:text-white">
                 {`${selectedItems.length}/${limit} selected`}
             </div>
 
-            {/* Wrap content in a flex div */}
             <div className="flex justify-center">
-                <div className="flex flex-col flex-wrap">
-                    {/* Map and render sampleData */}
-                    {sampleData.map((item, index) => {
+                <div className="flex flex-wrap">
+                    {content.map((item, index) => {
                         const isHighlighted =
                             searchTerm &&
                             item.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -72,13 +65,11 @@ function OptionInvestmentGroup({ title, hasSearch, limit }) {
                                 } ${
                                     isDarkened ? "darkened" : ""
                                 } border-2 border-black dark:border-gray-200 inline-block px-9`}
-                                title={item.name} // tooltip = name
-                                onMouseDown={() => handleItemClick(index)} // on MOUSE DOWN
+                                title={item.name}
+                                onMouseDown={() => handleItemClick(index)}
                             >
                                 <div className="tooltip flex flex-wrap">
-                                    {/*  shown (item name)*/}
-                                    <span className="pointer-events-none select-none w-full text-lg text-gray-800 dark:text-white">{item.name}</span> 
-                                    {/* hidden until hover (tooltip item description) */}
+                                    <span className="pointer-events-none select-none w-full text-lg text-gray-800 dark:text-white">{item.name}</span>
                                     <span className="tooltiptext pointer-events-none select-none">{item.description}</span>
                                 </div>
                             </div>
