@@ -28,7 +28,15 @@ function OptionInvestmentGroup({ title, hasSearch, limit }) {
     const sampleData = [
         { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
         { name: "Breach", description: "Map contains an additional Breach", price: 6 },
-        { name: "Delirium", description: "Map contains an additional Delirium Mirror", price: 6 }
+        { name: "Delirium", description: "Map contains an additional Delirium Mirror", price: 6 },
+        { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
+        { name: "Breach", description: "Map contains an additional Breach", price: 6 },
+        { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
+        { name: "Breach", description: "Map contains an additional Breach", price: 6 },
+        { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
+        { name: "Breach", description: "Map contains an additional Breach", price: 6 },
+        { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
+        { name: "Breach", description: "Map contains an additional Breach", price: 6 }
     ];
 
     return (
@@ -47,7 +55,7 @@ function OptionInvestmentGroup({ title, hasSearch, limit }) {
 
             {/* Wrap content in a flex div */}
             <div className="flex justify-center">
-                <div className="flex-wrap flex flex-col">
+                <div className="flex flex-col flex-wrap">
                     {/* Map and render sampleData */}
                     {sampleData.map((item, index) => {
                         const isHighlighted =
@@ -63,14 +71,15 @@ function OptionInvestmentGroup({ title, hasSearch, limit }) {
                                     isSelected ? "selected" : ""
                                 } ${
                                     isDarkened ? "darkened" : ""
-                                } border-2 border-black dark:border-gray-200 inline-block`}
+                                } border-2 border-black dark:border-gray-200 inline-block px-9`}
                                 title={item.name} // tooltip = name
                                 onMouseDown={() => handleItemClick(index)} // on MOUSE DOWN
                             >
-                                {/* hover tooltip */}
                                 <div className="tooltip flex flex-wrap">
-                                    <span style={{ pointerEvents: "none" }}>{item.name}</span>
-                                    <span className="tooltiptext">{item.description}</span>
+                                    {/*  shown (item name)*/}
+                                    <span className="pointer-events-none select-none w-full text-lg text-gray-800 dark:text-white">{item.name}</span> 
+                                    {/* hidden until hover (tooltip item description) */}
+                                    <span className="tooltiptext pointer-events-none select-none">{item.description}</span>
                                 </div>
                             </div>
                         );
