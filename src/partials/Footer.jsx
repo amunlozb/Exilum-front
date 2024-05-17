@@ -212,7 +212,7 @@ function Footer() {
               Subscribe
             </h6>
             <p className="text-sm  text-gray-600 dark:text-gray-400 mb-4">
-              Get the latest news and articles to your inbox every month.
+              Get the latest news and articles sent to your inbox every month.
             </p>
             <form>
               <div className="flex flex-wrap mb-4">

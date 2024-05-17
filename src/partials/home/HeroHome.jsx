@@ -23,7 +23,7 @@ function HeroHome() {
             </h1>
             <div className="max-w-3xl mx-auto">
               <p
-                className="text-xl text-gray-600 dark:text-gray-400 mb-8"
+                className="text-xl text-gray-600 dark:text-gray-400 mb-8 text-balance"
                 data-aos="zoom-y-out"
                 data-aos-delay="150"
               >
