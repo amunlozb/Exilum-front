@@ -18,6 +18,7 @@ import Investments from './pages/Investments';
 import Admin from './pages/Admin';
 import isAdmin from './hooks/isAdmin';
 import { auth } from "./firebase";
+import Tests from './pages/Tests';
 
 function App() {  
   
@@ -61,6 +62,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/tests" element={<Tests />} />
       </Routes>
     </>
   );

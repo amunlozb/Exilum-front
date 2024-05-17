@@ -65,6 +65,14 @@ function Header() {
                     Investments
                   </Navbar.Link>
 
+                  <Navbar.Link 
+                    href="/tests"
+                    className=" md:text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500
+                    md:px-5 md:py-3 transition duration-150 ease-in-out "
+                  >
+                    Tests
+                  </Navbar.Link>
+
                   <Navbar.Link
                     href="/signin"
                     className="md:text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500
