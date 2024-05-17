@@ -129,6 +129,7 @@
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s, transform 0.3s;
+    margin-bottom: 5px;
 }
 
 .tooltip:hover .tooltiptext {

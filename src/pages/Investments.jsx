@@ -7,6 +7,7 @@ import Footer from "../partials/Footer";
 import Newsletter from "../partials/Newsletter";
 
 import SelectableInvestmentGroup from "../partials/investments/SelectableInvestmentGroup";
+import OptionInvestmentGroup from "../partials/investments/OptionInvestmentGroup";
 
 function Investments() {
   const sampleContent = [
@@ -173,6 +174,8 @@ function Investments() {
     
   ];
 
+  const content2 = [{name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6}, {name: "Breach", description: "Map contains an additional Breach", price: 6}, {name: "Delirium", description: "Map contains an additional Delirium Mirror", price: 6}]
+
   return (
     // Wrap everything in Flowbite so dark mode works
     <Flowbite>
@@ -195,6 +198,11 @@ function Investments() {
             content={sampleContent}
             limit={6}
           />
+          <OptionInvestmentGroup
+            title="Map Device Craft"
+            hasSearch={true}
+            content={content2}
+            limit={1}/>
           {/* Calculate Button */}
           <a
             className="btn text-white bg-pink-700 hover:bg-pink-800 shadow-xl"
