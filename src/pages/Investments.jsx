@@ -6,7 +6,7 @@ import Header from "../partials/Header";
 import Footer from "../partials/Footer";
 import Newsletter from "../partials/Newsletter";
 
-import InvestmentGroup from "../partials/investments/InvestmentGroup";
+import SelectableInvestmentGroup from "../partials/investments/SelectableInvestmentGroup";
 
 function Investments() {
   const sampleContent = [
@@ -183,15 +183,17 @@ function Investments() {
         {/*  Page content */}
         <main className="flex flex-col mt-36 gap-10 items-center text-center">
           {/*  Page sections */}{" "}
-          <InvestmentGroup
+          <SelectableInvestmentGroup
             title="Scarabs"
             hasSearch={true}
             content={sampleContent}
+            limit={4}
           />
-          <InvestmentGroup
+          <SelectableInvestmentGroup
             title="Delirium Orbs"
             hasSearch={true}
             content={sampleContent}
+            limit={6}
           />
           {/* Calculate Button */}
           <a

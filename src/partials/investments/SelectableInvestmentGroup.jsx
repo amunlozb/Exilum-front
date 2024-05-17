@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 
-function InvestmentGroup({ title, hasSearch, content }) {
+function InvestmentGroup({ title, hasSearch, content, limit}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -14,7 +14,7 @@ function InvestmentGroup({ title, hasSearch, content }) {
       if (prevSelectedItems.includes(index)) {
         // Deselect item
         return prevSelectedItems.filter((i) => i !== index);
-      } else if (prevSelectedItems.length < 4) {
+      } else if (prevSelectedItems.length < limit) {
         // Select item if less than 4 are selected
         return [...prevSelectedItems, index];
       } else {
@@ -35,7 +35,7 @@ function InvestmentGroup({ title, hasSearch, content }) {
 
       {/* Counter for selected items */}
       <div className="selected-counter mb-3 dark:text-white">
-        {`${selectedItems.length}/4 selected`}
+        {`${selectedItems.length}/${limit} selected`}
       </div>
 
       {/* Wrap content in a flex div */}
