@@ -1,4 +1,3 @@
-// SelectableInvestmentGroup.jsx
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import SearchBar from "./SearchBar";
 
@@ -14,7 +13,13 @@ function arraysEqual(a, b) {
   return true;
 }
 
-function SelectableInvestmentGroup({ title, hasSearch, content, limit, onSelectionChange }) {
+function SelectableInvestmentGroup({
+  title,
+  hasSearch,
+  content,
+  limit,
+  onSelectionChange,
+}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -23,6 +28,7 @@ function SelectableInvestmentGroup({ title, hasSearch, content, limit, onSelecti
   };
 
   const handleItemClick = (index) => {
+    console.log("Item clicked:", index); // Debugging
     setSelectedItems((prevSelectedItems) => {
       if (prevSelectedItems.includes(index)) {
         return prevSelectedItems.filter((i) => i !== index);
@@ -35,7 +41,7 @@ function SelectableInvestmentGroup({ title, hasSearch, content, limit, onSelecti
   };
 
   const notifySelectionChange = useCallback(() => {
-    onSelectionChange(selectedItems.map(index => content[index].alt));
+    onSelectionChange(selectedItems.map((index) => content[index].alt));
   }, [selectedItems, content, onSelectionChange]);
 
   // Use a ref to store the previous selected items
@@ -61,14 +67,20 @@ function SelectableInvestmentGroup({ title, hasSearch, content, limit, onSelecti
       <div className="flex justify-center">
         <div className="flex-wrap">
           {content.map((item, index) => {
-            const isHighlighted = searchTerm && item.alt.toLowerCase().includes(searchTerm.toLowerCase());
+            const isHighlighted =
+              searchTerm &&
+              item.alt.toLowerCase().includes(searchTerm.toLowerCase());
             const isSelected = selectedItems.includes(index);
             const isDarkened = searchTerm && !isHighlighted && !isSelected;
 
             return (
               <div
                 key={index}
-                className={`item ${isHighlighted ? "highlight" : ""} ${isSelected ? "selected" : ""} ${isDarkened ? "darkened" : ""} border-2 border-black dark:border-gray-200 inline-block`}
+                className={`item ${isHighlighted ? "highlight" : ""} ${
+                  isSelected ? "selected" : ""
+                } ${
+                  isDarkened ? "darkened" : ""
+                } border-2 border-black dark:border-gray-200 inline-block transition-transform duration-300 ease-in transform-gpu`}
                 title={item.text}
                 onMouseDown={() => handleItemClick(index)}
               >

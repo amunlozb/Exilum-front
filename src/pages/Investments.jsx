@@ -77,7 +77,7 @@ function Investments() {
           />
           {/* Calculate Button */}
           <button
-            className="btn text-white bg-pink-700 hover:bg-pink-800 shadow-xl select-none pointer-events-auto text-2xl font-bold"
+            className="btn text-white bg-pink-700 hover:bg-pink-800 active:bg-pink-900 shadow-xl select-none pointer-events-auto text-xl px-8 py-3 rounded-lg transition duration-150 ease-in-out"
             onClick={handleCalculate}
           >
             Calculate
