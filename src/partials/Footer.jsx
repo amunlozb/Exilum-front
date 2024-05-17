@@ -267,7 +267,7 @@ function Footer() {
             <li className="ml-4">
               <Link
                 to="https://github.com/amunlozb"
-                className="border-2 border-blanco rounded-full text-sm text-blanco p-3 mx-1 flex justify-center items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-700 bg-white hover:bg-white-100 shadow transition duration-150 ease-in-out"
+                className="border-2 border-blanco rounded-full text-sm text-blanco p-3 mx-1 flex justify-center items-center text-gray-600 dark:text-gray-800 hover:text-gray-900 dark:hover:text-gray-700 bg-white hover:bg-white-100 shadow transition duration-150 ease-in-out"
                 aria-label="Github"
               >
                 <FaGithub/>
@@ -277,7 +277,7 @@ function Footer() {
             <li className="ml-4">
               <Link
                 to="https://www.linkedin.com/in/amunloz/"
-                className="border-2 border-blanco rounded-full text-sm text-blanco p-3 mx-1 flex justify-center items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-700 bg-white hover:bg-white-100 shadow transition duration-150 ease-in-out"
+                className="border-2 border-blanco rounded-full text-sm text-blanco p-3 mx-1 flex justify-center items-center text-gray-600 dark:text-gray-800 hover:text-gray-900 dark:hover:text-gray-700 bg-white hover:bg-white-100 shadow transition duration-150 ease-in-out"
                 aria-label="LinkedIn"
               >
                 <FaLinkedin/>

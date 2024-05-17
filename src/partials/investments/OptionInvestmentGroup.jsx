@@ -49,7 +49,7 @@ function OptionInvestmentGroup({ title, hasSearch, content, limit, onSelectionCh
             </div>
 
             <div className="flex justify-center">
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap flex-col">
                     {content.map((item, index) => {
                         const isHighlighted =
                             searchTerm &&
