@@ -23,11 +23,16 @@ function TestContent() {
         fetchEndpoint("http://localhost:8080/api/test/admin");
     };
 
+    const handleFetchLogout = () => {
+        fetchEndpoint("http://localhost:8080/api/auth/logout");
+    }
+
     return (
-        <div className="bg-red-500 flex justify-center mt-40">
-            <button onClick={handleFetchPublic}>Fetch Public Endpoint</button>
-            <button onClick={handleFetchAuthenticated}>Fetch Authenticated Endpoint</button>
-            <button onClick={handleFetchAdmin}>Fetch Admin Endpoint</button>
+        <div className="flex gap-4 justify-center mt-40">
+            <button className="bg-green-400" onClick={handleFetchPublic}>Fetch Public Endpoint</button>
+            <button className="bg-green-400" onClick={handleFetchAuthenticated}>Fetch Authenticated Endpoint</button>
+            <button className="bg-green-400" onClick={handleFetchAdmin}>Fetch Admin Endpoint</button>
+            <button className="bg-green-400" onClick={handleFetchLogout}>Logout</button>
         </div>
     );
 }
