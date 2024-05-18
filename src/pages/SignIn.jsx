@@ -30,23 +30,23 @@ function SignIn() {
       const user = userCredential.user;
       const userToken = await user.getIdToken();
 
-      // Send POST request to endpoint -> it returns HTTP-Only cookie with session token
-      await axios.post(
-        "http://localhost:8080/api/auth/sessionLogin",
+      // Send POST request to endpoint
+      const role = await axios.post(
+        "http://localhost:8080/api/auth/signin",
+        {},
         {
-          idToken: userToken,
-        },
-        {
-          withCredentials: true,
           headers: {
         "Content-Type": "application/json",
+        "Authorization": userToken,
           },
         }
       );
 
+      sessionStorage.setItem("role", role.data[0]);
+
       // Redirect to home page
       console.log("SIGNING IN SUCCESSFULLY");
-      // window.location.href = "/";
+      window.location.href = "/";
     } catch (error) {
       console.log("SIGNING IN FAILED");
       console.log(error);
