@@ -24,7 +24,7 @@ function TestContent() {
     };
 
     const handleFetchLogout = () => {
-        fetchEndpoint("http://localhost:8080/api/auth/logout");
+        fetchEndpoint("http://localhost:8080/api/auth/sessionLogout");
     }
 
     return (
