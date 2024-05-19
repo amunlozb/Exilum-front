@@ -56,7 +56,7 @@ function HeroHome() {
           {/* Hero image */}
 
           <div
-            className="relative flex justify-center mb-8"
+            className="relative flex justify-center mt-20 mb-8"
             data-aos="zoom-y-out"
             data-aos-delay="250"
             data-aos-offset="400"

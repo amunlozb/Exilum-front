@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+import { getAuth } from "firebase/auth";
 
 function TestContent() {
     const fetchEndpoint = async (url) => {
@@ -23,9 +25,29 @@ function TestContent() {
         fetchEndpoint("http://localhost:8080/api/test/admin");
     };
 
-    const handleFetchLogout = () => {
-        fetchEndpoint("http://localhost:8080/api/auth/sessionLogout");
-    }
+    const handleFetchLogout = async () => {
+        const user = getAuth().currentUser;
+        const uid = user.uid;
+
+        try {
+            await axios.post(
+                "http://localhost:8080/api/auth/signout",
+                {},
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": await user.getIdToken(),
+                        "uid": uid,
+                    },
+                }
+            );
+
+            sessionStorage.removeItem("role");
+            window.location.reload();
+        } catch (error) {
+            console.error("Error signing out:", error);
+        }
+    };
 
     return (
         <div className="flex gap-4 justify-center mt-40">

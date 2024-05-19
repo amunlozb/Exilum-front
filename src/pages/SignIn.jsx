@@ -38,6 +38,7 @@ function SignIn() {
           headers: {
         "Content-Type": "application/json",
         "Authorization": userToken,
+        "uid": user.uid,
           },
         }
       );
