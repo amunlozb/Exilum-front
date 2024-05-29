@@ -8,8 +8,10 @@ import OptionInvestmentGroup from "../partials/investments/OptionInvestmentGroup
 function Investments() {
   const [selectedScarabs, setSelectedScarabs] = useState([]);
   const [selectedDeliriumOrbs, setSelectedDeliriumOrbs] = useState([]);
+  const [selectedMaps, setSelectedMaps] = useState([]);
   const [selectedMapDeviceCraft, setSelectedMapDeviceCraft] = useState(null);
   const [scarabs, setScarabs] = useState([]);
+  const [maps, setMaps] = useState([]);
 
   useEffect(() => {
     const fetchScarabs = async () => {
@@ -23,7 +25,19 @@ function Investments() {
       }
     };
 
+    const fetchMaps = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/getMaps");
+        const data = await response.json();
+        setMaps(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Failed to fetch maps:", error);
+      }
+    }
+
     fetchScarabs();
+    fetchMaps();
   }, []);
 
   const handleCalculate = () => {
@@ -31,6 +45,7 @@ function Investments() {
       scarabs: selectedScarabs,
       deliriumOrbs: selectedDeliriumOrbs,
       mapDeviceCraft: selectedMapDeviceCraft,
+      maps: selectedMaps,
     };
 
     alert(`Selected Data: ${JSON.stringify(data, null, 2)}`);
@@ -49,6 +64,10 @@ function Investments() {
     setSelectedMapDeviceCraft(selected);
   }, []);
 
+  const handleMapChange = useCallback((selected) => {
+    setSelectedMaps(selected);
+  }, []);
+
   return (
     <Flowbite>
       <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900">
@@ -61,6 +80,14 @@ function Investments() {
             content={scarabs}
             limit={4}
             onSelectionChange={handleScarabsChange}
+          />
+          {/* Map */}
+          <SelectableInvestmentGroup
+            title="Maps"
+            hasSearch={true}
+            content={maps}
+            limit={1}
+            onSelectionChange={handleMapChange}
           />
           {/* Delirium Orbs */}
           <SelectableInvestmentGroup
