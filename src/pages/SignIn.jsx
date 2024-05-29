@@ -40,6 +40,7 @@ function SignIn() {
         "Authorization": userToken,
         "uid": user.uid,
           },
+          withCredentials: true, 
         }
       );
 
