@@ -41,22 +41,19 @@ function SelectableInvestmentGroup({
   };
 
   const notifySelectionChange = useCallback(() => {
-    onSelectionChange(selectedItems.map((index) => content[index].alt));
+    onSelectionChange(selectedItems.map((index) => content[index].name));
   }, [selectedItems, content, onSelectionChange]);
 
-  // Use a ref to store the previous selected items
   const prevSelectedItemsRef = useRef([]);
   useEffect(() => {
-    // Only trigger the effect if selectedItems changed due to user interaction
     if (!arraysEqual(selectedItems, prevSelectedItemsRef.current)) {
       notifySelectionChange();
-      // Update the ref with the latest selectedItems
       prevSelectedItemsRef.current = selectedItems;
     }
   }, [selectedItems, notifySelectionChange]);
 
   return (
-    <div className="lg:w-5/12 w-full bg-white dark:bg-gray-900 rounded border-2 border-gray-300 dark:border-gray-700 py-10 px-8 md:py-16 md:px-12 shadow-2xl overflow-hidden">
+    <div className="lg:w-7/12 w-full bg-white dark:bg-gray-900 rounded border-2 border-gray-300 dark:border-gray-700 py-10 px-8 md:py-16 md:px-12 shadow-2xl overflow-hidden">
       <h1 className="mb-6 font-extrabold leading-none tracking-tight text-gray-900 text-3xl lg:text-3xl dark:text-white">
         {title}
       </h1>
@@ -69,24 +66,24 @@ function SelectableInvestmentGroup({
           {content.map((item, index) => {
             const isHighlighted =
               searchTerm &&
-              item.alt.toLowerCase().includes(searchTerm.toLowerCase());
+              item.name.toLowerCase().includes(searchTerm.toLowerCase());
             const isSelected = selectedItems.includes(index);
             const isDarkened = searchTerm && !isHighlighted && !isSelected;
 
             return (
               <div
                 key={index}
-                className={`item ${isHighlighted ? "highlight" : ""} ${
+                className={`item ${isHighlighted ? "highlight border-pink-400 dark:border-pink-400 transition-transform duration-300 ease-in" : ""} ${
                   isSelected ? "selected" : ""
                 } ${
                   isDarkened ? "darkened" : ""
-                } border-2 border-black dark:border-gray-200 inline-block transition-transform duration-300 ease-in transform-gpu`}
-                title={item.text}
+                } border-2 border-black dark:border-gray-200 inline-block transition duration-200 ease-in`}
+                title={`${item.name} - ${item.mechanic} - $${item.price}`}
                 onMouseDown={() => handleItemClick(index)}
               >
                 <div className="tooltip flex flex-wrap">
-                  <img src={item.imageSrc} alt={item.alt} draggable="false" />
-                  <span className="tooltiptext">{item.alt}</span>
+                  <img src={item.icon_url} alt={item.name} draggable="false" />
+                  <span className="tooltiptext">{item.name}</span>
                 </div>
               </div>
             );
