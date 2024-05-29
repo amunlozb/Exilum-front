@@ -1,5 +1,4 @@
-// Investments.jsx
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Flowbite } from "flowbite-react";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
@@ -10,61 +9,32 @@ function Investments() {
   const [selectedScarabs, setSelectedScarabs] = useState([]);
   const [selectedDeliriumOrbs, setSelectedDeliriumOrbs] = useState([]);
   const [selectedMapDeviceCraft, setSelectedMapDeviceCraft] = useState(null);
+  const [scarabs, setScarabs] = useState([]);
 
-  const sampleContent = [
-    { alt: "Image 1", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 2", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 3", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 4", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    
-    { alt: "Image 1", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 2", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 3", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 4", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    
-    { alt: "Image 1", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 2", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 3", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 4", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    
-    { alt: "Image 1", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 2", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 3", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 4", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 1", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 2", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 3", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 4", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 1", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 2", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 3", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 4", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 1", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 2", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 3", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-    { alt: "Image 4", imageSrc: "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxNYWdpYyIsInNjYWxlIjoxfV0/6308fc8ca2/CurrencyRerollMagic.png" },
-  ];
+  useEffect(() => {
+    const fetchScarabs = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/getScarabs");
+        const data = await response.json();
+        setScarabs(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Failed to fetch scarabs:", error);
+      }
+    };
 
-  const content2 = [
-    { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
-    { name: "Breach", description: "Map contains an additional Breach", price: 6 },
-    { name: "Delirium", description: "Map contains an additional Delirium Mirror", price: 6 },
-    { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
-    { name: "Breach", description: "Map contains an additional Breach", price: 6 },
-    { name: "Delirium", description: "Map contains an additional Delirium Mirror", price: 6 },
-    { name: "Harbinger", description: "Map contains 2 additional Harbingers", price: 6 },
-    { name: "Breach", description: "Map contains an additional Breach", price: 6 },
-    { name: "Delirium", description: "Map contains an additional Delirium Mirror", price: 6 },
-  ];
+    fetchScarabs();
+  }, []);
 
   const handleCalculate = () => {
     const data = {
       scarabs: selectedScarabs,
       deliriumOrbs: selectedDeliriumOrbs,
-      mapDeviceCraft: selectedMapDeviceCraft
+      mapDeviceCraft: selectedMapDeviceCraft,
     };
 
     alert(`Selected Data: ${JSON.stringify(data, null, 2)}`);
+    console.log(JSON.stringify(data, null, 2));
   };
 
   const handleScarabsChange = useCallback((selected) => {
@@ -88,7 +58,7 @@ function Investments() {
           <SelectableInvestmentGroup
             title="Scarabs"
             hasSearch={true}
-            content={sampleContent}
+            content={scarabs}
             limit={4}
             onSelectionChange={handleScarabsChange}
           />
@@ -96,7 +66,7 @@ function Investments() {
           <SelectableInvestmentGroup
             title="Delirium Orbs"
             hasSearch={true}
-            content={sampleContent}
+            content={["None", "Sextant", "Scarab"]}
             limit={6}
             onSelectionChange={handleDeliriumOrbsChange}
           />
@@ -104,7 +74,7 @@ function Investments() {
           <OptionInvestmentGroup
             title="Map Device Craft"
             hasSearch={true}
-            content={content2}
+            content={["None", "Sextant", "Scarab"]}
             limit={1}
             onSelectionChange={handleMapDeviceCraftChange}
           />

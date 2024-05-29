@@ -41,16 +41,13 @@ function SelectableInvestmentGroup({
   };
 
   const notifySelectionChange = useCallback(() => {
-    onSelectionChange(selectedItems.map((index) => content[index].alt));
+    onSelectionChange(selectedItems.map((index) => content[index].name));
   }, [selectedItems, content, onSelectionChange]);
 
-  // Use a ref to store the previous selected items
   const prevSelectedItemsRef = useRef([]);
   useEffect(() => {
-    // Only trigger the effect if selectedItems changed due to user interaction
     if (!arraysEqual(selectedItems, prevSelectedItemsRef.current)) {
       notifySelectionChange();
-      // Update the ref with the latest selectedItems
       prevSelectedItemsRef.current = selectedItems;
     }
   }, [selectedItems, notifySelectionChange]);
@@ -69,24 +66,24 @@ function SelectableInvestmentGroup({
           {content.map((item, index) => {
             const isHighlighted =
               searchTerm &&
-              item.alt.toLowerCase().includes(searchTerm.toLowerCase());
+              item.name.toLowerCase().includes(searchTerm.toLowerCase());
             const isSelected = selectedItems.includes(index);
             const isDarkened = searchTerm && !isHighlighted && !isSelected;
 
             return (
               <div
                 key={index}
-                className={`item ${isHighlighted ? "highlight" : ""} ${
+                className={`item ${isHighlighted ? "highlight border-pink-400 dark:border-pink-400" : ""} ${
                   isSelected ? "selected" : ""
                 } ${
                   isDarkened ? "darkened" : ""
                 } border-2 border-black dark:border-gray-200 inline-block transition-transform duration-300 ease-in transform-gpu`}
-                title={item.text}
+                title={`${item.name} - ${item.mechanic} - $${item.price}`}
                 onMouseDown={() => handleItemClick(index)}
               >
                 <div className="tooltip flex flex-wrap">
-                  <img src={item.imageSrc} alt={item.alt} draggable="false" />
-                  <span className="tooltiptext">{item.alt}</span>
+                  <img src={item.icon_url} alt={item.name} draggable="false" />
+                  <span className="tooltiptext">{item.name}</span>
                 </div>
               </div>
             );
