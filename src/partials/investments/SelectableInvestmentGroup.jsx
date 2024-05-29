@@ -73,11 +73,11 @@ function SelectableInvestmentGroup({
             return (
               <div
                 key={index}
-                className={`item ${isHighlighted ? "highlight border-pink-400 dark:border-pink-400" : ""} ${
+                className={`item ${isHighlighted ? "highlight border-pink-400 dark:border-pink-400 transition-transform duration-300 ease-in" : ""} ${
                   isSelected ? "selected" : ""
                 } ${
                   isDarkened ? "darkened" : ""
-                } border-2 border-black dark:border-gray-200 inline-block transition-transform duration-300 ease-in transform-gpu`}
+                } border-2 border-black dark:border-gray-200 inline-block transition duration-200 ease-in`}
                 title={`${item.name} - ${item.mechanic} - $${item.price}`}
                 onMouseDown={() => handleItemClick(index)}
               >
