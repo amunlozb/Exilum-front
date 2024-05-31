@@ -4,6 +4,7 @@ import Header from "../partials/Header";
 import Footer from "../partials/Footer";
 import SelectableInvestmentGroup from "../partials/investments/SelectableInvestmentGroup";
 import OptionInvestmentGroup from "../partials/investments/OptionInvestmentGroup";
+import MapInvestmentGroup from "../partials/investments/MapInvestmentGroup"; // Adjusted import statement
 
 function Investments() {
   const [selectedScarabs, setSelectedScarabs] = useState([]);
@@ -81,14 +82,8 @@ function Investments() {
             limit={4}
             onSelectionChange={handleScarabsChange}
           />
-          {/* Map */}
-          <SelectableInvestmentGroup
-            title="Maps"
-            hasSearch={true}
-            content={maps}
-            limit={1}
-            onSelectionChange={handleMapChange}
-          />
+          {/* Maps */}
+          <MapInvestmentGroup title="Maps" limit={1} onSelectionChange={handleMapChange} />
           {/* Delirium Orbs */}
           <SelectableInvestmentGroup
             title="Delirium Orbs"

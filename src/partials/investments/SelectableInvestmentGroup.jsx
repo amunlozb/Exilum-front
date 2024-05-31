@@ -1,3 +1,4 @@
+// SelectableInvestmentGroup.jsx
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import SearchBar from "./SearchBar";
 
