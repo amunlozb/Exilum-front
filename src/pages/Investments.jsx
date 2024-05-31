@@ -13,6 +13,7 @@ function Investments() {
   const [selectedMapDeviceCraft, setSelectedMapDeviceCraft] = useState(null);
   const [scarabs, setScarabs] = useState([]);
   const [maps, setMaps] = useState([]);
+  const [deliriumOrbs, setDeliriumOrbs] = useState([]);
 
   useEffect(() => {
     const fetchScarabs = async () => {
@@ -35,10 +36,24 @@ function Investments() {
       } catch (error) {
         console.error("Failed to fetch maps:", error);
       }
-    }
+    };
+
+    const fetchDeliriumOrbs = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/getDeliriumOrbs"
+        );
+        const data = await response.json();
+        setDeliriumOrbs(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Failed to fetch delirium orbs:", error);
+      }
+    };
 
     fetchScarabs();
     fetchMaps();
+    fetchDeliriumOrbs();
   }, []);
 
   const handleCalculate = () => {
@@ -83,13 +98,17 @@ function Investments() {
             onSelectionChange={handleScarabsChange}
           />
           {/* Maps */}
-          <MapInvestmentGroup title="Maps" limit={1} onSelectionChange={handleMapChange} />
+          <MapInvestmentGroup
+            title="Maps"
+            limit={1}
+            onSelectionChange={handleMapChange}
+          />
           {/* Delirium Orbs */}
           <SelectableInvestmentGroup
             title="Delirium Orbs"
             hasSearch={true}
-            content={["None", "Sextant", "Scarab"]}
-            limit={6}
+            content={deliriumOrbs}
+            limit={1}
             onSelectionChange={handleDeliriumOrbsChange}
           />
           {/* Map Device Craft */}
