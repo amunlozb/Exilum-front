@@ -1,13 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import { Button } from "flowbite-react";
 import pantheon from "../../images/pantheon.png";
 
 function HeroHome() {
+  const handleNavigation = (url) => {
+    window.location.href = url;
+  };
   
   return (
     <section className="relative">
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6"></div>
         {/* Hero content */}
         <div className="pt-32 pb-12 md:pt-40 md:pb-20">
           {/* Section header */}
@@ -36,23 +39,24 @@ function HeroHome() {
                 data-aos-delay="300"
               >
                 <div>
-                  <Button gradientDuoTone="purpleToPink" size="lg" href="/signup">
+                  <Button gradientDuoTone="purpleToPink" size="lg" 
+                          onClick={() => handleNavigation('/signup')}>
                     Try it now for free
                   </Button>
                 </div>
                 <div>
-                  <Button gradientDuoTone="purpleToPink" outline size="lg" href="https://github.com/amunlozb/Exilum-front">
+                  <Button gradientDuoTone="purpleToPink" outline size="lg"
+                          onClick={() => handleNavigation('https://github.com/amunlozb/Exilum-front')}>
                     Github Repo
-                  </Button>
+                  </Button>              
                 </div>
-              </div>
             </div>
           </div>
 
           {/* Hero image */}
 
           <div
-            className="relative flex justify-center mb-8"
+            className="relative flex justify-center mt-20 mb-8"
             data-aos="zoom-y-out"
             data-aos-delay="250"
             data-aos-offset="400"
