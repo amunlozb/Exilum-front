@@ -4,7 +4,8 @@ import Header from "../partials/Header";
 import Footer from "../partials/Footer";
 import SelectableInvestmentGroup from "../partials/investments/SelectableInvestmentGroup";
 import OptionInvestmentGroup from "../partials/investments/OptionInvestmentGroup";
-import MapInvestmentGroup from "../partials/investments/MapInvestmentGroup"; // Adjusted import statement
+import MapInvestmentGroup from "../partials/investments/MapInvestmentGroup";
+import root_url from "../const/root_url";
 
 function Investments() {
   const [selectedScarabs, setSelectedScarabs] = useState([]);
@@ -27,22 +28,9 @@ function Investments() {
       }
     };
 
-    const fetchMaps = async () => {
-      try {
-        const response = await fetch("https://exilum-back-c24f5etkvq-ey.a.run.app/api/getMaps");
-        const data = await response.json();
-        setMaps(data);
-        console.log(data);
-      } catch (error) {
-        console.error("Failed to fetch maps:", error);
-      }
-    };
-
     const fetchDeliriumOrbs = async () => {
       try {
-        const response = await fetch(
-          "https://exilum-back-c24f5etkvq-ey.a.run.app/api/getDeliriumOrbs"
-        );
+        const response = await fetch(`${root_url}/api/getDeliriumOrbs`);
         const data = await response.json();
         setDeliriumOrbs(data);
         console.log(data);
@@ -52,7 +40,6 @@ function Investments() {
     };
 
     fetchScarabs();
-    fetchMaps();
     fetchDeliriumOrbs();
   }, []);
 

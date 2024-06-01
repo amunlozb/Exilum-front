@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Accordion } from "flowbite-react";
 import SearchBar from "./SearchBar";
+import root_url from "../../const/root_url";
 
 const MapInvestmentGroup = ({ title, limit, onSelectionChange }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,21 +17,11 @@ const MapInvestmentGroup = ({ title, limit, onSelectionChange }) => {
 
   useEffect(() => {
     const fetchMaps = async () => {
-      const whiteMaps = await fetch(
-        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/getMapsByTierTest?inputTier=WHITE"
-      ).then((res) => res.json());
-      const yellowMaps = await fetch(
-        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/getMapsByTierTest?inputTier=YELLOW"
-      ).then((res) => res.json());
-      const redMaps = await fetch(
-        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/getMapsByTierTest?inputTier=RED"
-      ).then((res) => res.json());
-      const otherMaps = await fetch(
-        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/getMapsByTierTest?inputTier=OTHER"
-      ).then((res) => res.json());
-      const blightedMaps = await fetch(
-        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/getBlightedMaps"
-      ).then((res) => res.json());
+      const whiteMaps = await fetch(`${root_url}/api/test/getMapsByTierTest?inputTier=WHITE`).then((res) => res.json());
+      const yellowMaps = await fetch(`${root_url}/api/test/getMapsByTierTest?inputTier=YELLOW`).then((res) => res.json());
+      const redMaps = await fetch(`${root_url}/api/test/getMapsByTierTest?inputTier=RED`).then((res) => res.json());
+      const otherMaps = await fetch(`${root_url}/api/test/getMapsByTierTest?inputTier=OTHER`).then((res) => res.json());
+      const blightedMaps = await fetch(`${root_url}/api/test/getBlightedMaps`).then((res) => res.json());
 
       setMaps({
         white: whiteMaps,
