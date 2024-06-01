@@ -22,7 +22,6 @@ function Investments() {
         const response = await fetch("https://exilum-back-c24f5etkvq-ey.a.run.app/api/getScarabs");
         const data = await response.json();
         setScarabs(data);
-        console.log(data);
       } catch (error) {
         console.error("Failed to fetch scarabs:", error);
       }
@@ -33,7 +32,6 @@ function Investments() {
         const response = await fetch(`${root_url}/api/getDeliriumOrbs`);
         const data = await response.json();
         setDeliriumOrbs(data);
-        console.log(data);
       } catch (error) {
         console.error("Failed to fetch delirium orbs:", error);
       }
