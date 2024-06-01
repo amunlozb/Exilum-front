@@ -32,7 +32,7 @@ function SignIn() {
 
       // Send POST request to endpoint
       const role = await axios.post(
-        "http://localhost:8080/api/auth/signin",
+        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/auth/signin",
         {},
         {
           headers: {

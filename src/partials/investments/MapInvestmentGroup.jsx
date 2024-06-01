@@ -17,19 +17,19 @@ const MapInvestmentGroup = ({ title, limit, onSelectionChange }) => {
   useEffect(() => {
     const fetchMaps = async () => {
       const whiteMaps = await fetch(
-        "http://localhost:8080/api/test/getMapsByTierTest?inputTier=WHITE"
+        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/getMapsByTierTest?inputTier=WHITE"
       ).then((res) => res.json());
       const yellowMaps = await fetch(
-        "http://localhost:8080/api/test/getMapsByTierTest?inputTier=YELLOW"
+        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/getMapsByTierTest?inputTier=YELLOW"
       ).then((res) => res.json());
       const redMaps = await fetch(
-        "http://localhost:8080/api/test/getMapsByTierTest?inputTier=RED"
+        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/getMapsByTierTest?inputTier=RED"
       ).then((res) => res.json());
       const otherMaps = await fetch(
-        "http://localhost:8080/api/test/getMapsByTierTest?inputTier=OTHER"
+        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/getMapsByTierTest?inputTier=OTHER"
       ).then((res) => res.json());
       const blightedMaps = await fetch(
-        "http://localhost:8080/api/test/getBlightedMaps"
+        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/getBlightedMaps"
       ).then((res) => res.json());
 
       setMaps({
