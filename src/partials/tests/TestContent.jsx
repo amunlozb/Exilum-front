@@ -14,15 +14,15 @@ function TestContent() {
     };
 
     const handleFetchPublic = () => {
-        fetchEndpoint("http://localhost:8080/api/test/public");
+        fetchEndpoint("https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/public");
     };
 
     const handleFetchAuthenticated = () => {
-        fetchEndpoint("http://localhost:8080/api/test/authenticated");
+        fetchEndpoint("https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/authenticated");
     };
 
     const handleFetchAdmin = () => {
-        fetchEndpoint("http://localhost:8080/api/test/admin");
+        fetchEndpoint("https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/admin");
     };
 
     const handleFetchLogout = async () => {
@@ -31,7 +31,7 @@ function TestContent() {
 
         try {
             await axios.post(
-                "http://localhost:8080/api/auth/signout",
+                "https://exilum-back-c24f5etkvq-ey.a.run.app/api/auth/signout",
                 {},
                 {
                     headers: {

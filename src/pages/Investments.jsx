@@ -18,7 +18,7 @@ function Investments() {
   useEffect(() => {
     const fetchScarabs = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/getScarabs");
+        const response = await fetch("https://exilum-back-c24f5etkvq-ey.a.run.app/api/getScarabs");
         const data = await response.json();
         setScarabs(data);
         console.log(data);
@@ -29,7 +29,7 @@ function Investments() {
 
     const fetchMaps = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/getMaps");
+        const response = await fetch("https://exilum-back-c24f5etkvq-ey.a.run.app/api/getMaps");
         const data = await response.json();
         setMaps(data);
         console.log(data);
@@ -41,7 +41,7 @@ function Investments() {
     const fetchDeliriumOrbs = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/api/getDeliriumOrbs"
+          "https://exilum-back-c24f5etkvq-ey.a.run.app/api/getDeliriumOrbs"
         );
         const data = await response.json();
         setDeliriumOrbs(data);

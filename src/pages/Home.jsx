@@ -17,7 +17,6 @@ function Home() {
     <Flowbite>
       <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900">
         {/*  Render the appropriate header based on the user's role */}
-        {/* {isAdmin ? <Header /> : <AdminHeader />} */}
         <Header />
         {/*  Page content */}
         <main className="flex-grow">

@@ -16,24 +16,10 @@ import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
 import Investments from './pages/Investments';
 import Admin from './pages/Admin';
-import isAdmin from './hooks/isAdmin';
 import { auth } from "./firebase";
 import Tests from './pages/Tests';
 
 function App() {  
-  
-  auth.onAuthStateChanged((user) => {
-  if (user) {
-
-    isAdmin().then((isAdmin) => {
-      console.log("Is Admin:", isAdmin);
-    }).catch((error) => {
-      console.error("Error checking admin status:", error);
-    });
-  } else {
-    console.log("USER IS NOT LOGGED IN");
-  }
-  });
 
   const location = useLocation();
 
