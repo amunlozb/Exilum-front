@@ -54,17 +54,17 @@ function QuantitySelection() {
               hasInput={true}
               showImage={true}
             />
+              <ItemCategory
+                categoryTitle="Map"
+                items={selectedMaps}
+                hasInput={false}
+                showImage={true}
+              />
             <ItemCategory
               categoryTitle="Map Device Craft"
               items={selectedMapDeviceCraft}
               hasInput={false}
               showImage={false}
-            />
-            <ItemCategory
-              categoryTitle="Maps"
-              items={selectedMaps}
-              hasInput={false}
-              showImage={true}
             />
             <ItemCategory
               categoryTitle="Crafting Materials"
