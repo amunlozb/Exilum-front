@@ -10,6 +10,7 @@ const MapInvestmentGroup = ({ title, limit, onSelectionChange }) => {
     white: [],
     yellow: [],
     red: [],
+    t17: [],
     other: [],
     blighted: [],
   });
@@ -20,6 +21,7 @@ const MapInvestmentGroup = ({ title, limit, onSelectionChange }) => {
       const whiteMaps = await fetch(`${root_url}/api/test/getMapsByTierTest?inputTier=WHITE`).then((res) => res.json());
       const yellowMaps = await fetch(`${root_url}/api/test/getMapsByTierTest?inputTier=YELLOW`).then((res) => res.json());
       const redMaps = await fetch(`${root_url}/api/test/getMapsByTierTest?inputTier=RED`).then((res) => res.json());
+      const t17Maps = await fetch(`${root_url}/api/test/getMapsByTierTest?inputTier=T17`).then((res) => res.json());
       const otherMaps = await fetch(`${root_url}/api/test/getMapsByTierTest?inputTier=OTHER`).then((res) => res.json());
       const blightedMaps = await fetch(`${root_url}/api/test/getBlightedMaps`).then((res) => res.json());
 
@@ -27,6 +29,7 @@ const MapInvestmentGroup = ({ title, limit, onSelectionChange }) => {
         white: whiteMaps,
         yellow: yellowMaps,
         red: redMaps,
+        t17: t17Maps,
         other: otherMaps,
         blighted: blightedMaps,
       });
@@ -154,6 +157,21 @@ const MapInvestmentGroup = ({ title, limit, onSelectionChange }) => {
             Red Maps
           </Accordion.Title>
           <Accordion.Content>{renderItems("red")}</Accordion.Content>
+        </Accordion.Panel>
+        <Accordion.Panel>
+          <Accordion.Title
+            className={
+              searchTerm !== "" &&
+              maps.t17.filter((item) =>
+                item.name.toLowerCase().includes(searchTerm.toLowerCase())
+              ).length > 0
+                ? "text-pink-500 dark:text-pink-400"
+                : "text-black dark:text-white"
+            }
+          >
+            T17 Maps
+          </Accordion.Title>
+          <Accordion.Content>{renderItems("t17")}</Accordion.Content>
         </Accordion.Panel>
         <Accordion.Panel>
           <Accordion.Title
