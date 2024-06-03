@@ -18,6 +18,7 @@ import Investments from './pages/Investments';
 import Admin from './pages/Admin';
 import { auth } from "./firebase";
 import Tests from './pages/Tests';
+import QuantitySelection from './pages/QuantitySelection';
 
 function App() {  
 
@@ -49,6 +50,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/tests" element={<Tests />} />
+        <Route path="/quantity-selection" element={<QuantitySelection/>} />
       </Routes>
     </>
   );

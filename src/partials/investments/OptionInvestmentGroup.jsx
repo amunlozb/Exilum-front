@@ -64,13 +64,14 @@ function OptionInvestmentGroup({ title, hasSearch, content, limit, onSelectionCh
                                     isSelected ? "selected" : ""
                                 } ${
                                     isDarkened ? "darkened" : ""
-                                } border-2 border-black dark:border-gray-200 inline-block px-9`}
+                                } border-2 border-black dark:border-gray-200 inline-block px-9 transition duration-200 ease-in`}
                                 title={item.name}
                                 onMouseDown={() => handleItemClick(index)}
                             >
                                 <div className="tooltip flex flex-wrap">
                                     <span className="pointer-events-none select-none w-full text-lg text-gray-800 dark:text-white">{item.name}</span>
-                                    <span className="tooltiptext pointer-events-none select-none">{item.description}</span>
+                                    {/* Show price (in chaos) when hovered */}
+                                    <span className="tooltiptext pointer-events-none select-none">{item.price} chaos orbs</span>
                                 </div>
                             </div>
                         );
