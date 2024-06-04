@@ -48,7 +48,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/dashboard" element={<Admin />} />
         <Route path="/tests" element={<Tests />} />
         <Route path="/quantity-selection" element={<QuantitySelection/>} />
       </Routes>

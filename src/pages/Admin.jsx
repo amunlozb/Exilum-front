@@ -1,10 +1,9 @@
 import React from "react";
 
-import AdminHeader from "../partials/admin/AdminHeader";
-import FeaturesHome from "../partials/home/Features";
-
+import Header from "../partials/Header";
 import Footer from "../partials/Footer";
 import { Flowbite } from "flowbite-react";
+import AdminPanel from "../partials/admin/AdminPanel";
 
 function Admin() {
     return (
@@ -12,13 +11,13 @@ function Admin() {
     <Flowbite>
     <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900">
         {/*  Site header */}
-        <AdminHeader />
+        <Header />
 
         {/*  Page content */}
         <main className="flex-grow">
           {/*  Page sections */}
         {/* <HeroHome /> */}
-        <FeaturesHome />
+        <AdminPanel />
         </main>
 
         {/*  Site footer */}

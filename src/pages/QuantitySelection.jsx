@@ -15,10 +15,9 @@ function QuantitySelection() {
   }, {});
 
   const [quantities, setQuantities] = useState(initialQuantities);
-  console.log(selectedItems);
-  console.log(quantities);
 
   const handleQuantityChange = (itemName, quantity) => {
+    console.log(`New quantity for ${itemName}: ${quantity}`);
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [itemName]: quantity,
