@@ -54,7 +54,7 @@ function Statistics() {
           },
         ],
         xaxis: {
-          categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
+          categories: ['13 June', '14 June', '15 June', '16 June', '17 June', '18 June', '19 June'],
           labels: {
             show: false,
           },
