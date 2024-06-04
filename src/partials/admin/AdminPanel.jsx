@@ -22,7 +22,7 @@ function AdminPanel() {
                     {/* Items */}
                     <div className="max-w-sm mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-start md:max-w-2xl lg:max-w-none">
                         {/* 1st item */}
-                        <a href="/test" className="relative flex flex-col items-center p-6 bg-white dark:bg-gray-900 rounded shadow-xl border-2 border-gray-300 dark:border-gray-700 active:bg-gray-200 dark:active:bg-gray-800">
+                        <a href="/admin/stats" className="relative flex flex-col items-center p-6 bg-white dark:bg-gray-900 rounded shadow-xl border-2 border-gray-300 dark:border-gray-700 active:bg-gray-200 dark:active:bg-gray-800">
                             <svg
                                 className="w-16 h-16 p-1 -mt-1 mb-2"
                                 viewBox="0 0 64 64"
@@ -58,10 +58,10 @@ function AdminPanel() {
                                 </g>
                             </svg>
                             <h4 className="text-xl font-bold leading-snug dark:text-white tracking-tight mb-1">
-                                <a href="/manage-users">Manage Users</a>
+                                <a href="/manage-users">View Statistics</a>
                             </h4>
                             <p className="text-gray-600 dark:text-gray-400 text-center">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Check the stats of the website and the strategies made by users.
                             </p>
                         </a>
 
