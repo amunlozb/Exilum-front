@@ -1,22 +1,17 @@
-// SignIn.jsx
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link } from "react-router-dom"; // Import useNavigate
 import Header from "../partials/Header";
 import { Flowbite } from "flowbite-react";
 import Footer from "../partials/Footer";
-import {
-  getAuth,
-  signInWithEmailAndPassword
-} from "firebase/auth";
-
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import root_url from "../const/root_url";
-
 import axios from "axios";
+
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
   const auth = getAuth();
 
   const handleSignIn = async (e) => {
@@ -40,10 +35,10 @@ function SignIn() {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": userToken,
-            "uid": user.uid,
+            Authorization: userToken,
+            uid: user.uid,
           },
-          withCredentials: true, 
+          withCredentials: true,
         }
       );
 
@@ -57,8 +52,24 @@ function SignIn() {
       console.log(error);
     }
   };
-  
 
+  const provider = new GoogleAuthProvider();
+  
+  const handleGoogleSignIn = async () => {
+    try {
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+
+      await signInWithPopup(auth, provider);
+
+      // Redirect to home page
+      console.log("User signed in successfully!"); 
+      window.location.href = "/"; 
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
+    }
+  };
+  
   return (
     <Flowbite>
       <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900">
@@ -174,7 +185,10 @@ function SignIn() {
                     </div>
                     <div className="flex flex-wrap -mx-3">
                       <div className="w-full px-3">
-                        <button className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center">
+                        <button
+                          className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center"
+                          onClick={handleGoogleSignIn} 
+                        >
                           <svg
                             className="w-4 h-4 fill-current text-white opacity-75 flex-shrink-0 mx-4"
                             viewBox="0 0 16 16"
