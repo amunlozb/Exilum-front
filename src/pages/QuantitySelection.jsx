@@ -8,7 +8,15 @@ import ItemCategory from "../partials/quantity_selection/ItemCategory";
 function QuantitySelection() {
   const location = useLocation();
   const { selectedItems } = location.state;
-  const [quantities, setQuantities] = useState({});
+
+  const initialQuantities = Object.values(selectedItems).flat().reduce((acc, item) => {
+    acc[item.name] = 1;
+    return acc;
+  }, {});
+
+  const [quantities, setQuantities] = useState(initialQuantities);
+  console.log(selectedItems);
+  console.log(quantities);
 
   const handleQuantityChange = (itemName, quantity) => {
     setQuantities((prevQuantities) => ({
@@ -17,10 +25,12 @@ function QuantitySelection() {
     }));
   };
 
-  const handleSubmit = () => {
-    // Do something with the selected items and quantities
-    console.log("Selected items with quantities:", selectedItems, quantities);
-    // Redirect to the previous screen or perform any other action
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Selected items with quantities:");
+    for (const [itemName, quantity] of Object.entries(quantities)) {
+      console.log(`${itemName}: ${quantity}`);
+    }
   };
 
   // Extracting selected items from selectedItems object
