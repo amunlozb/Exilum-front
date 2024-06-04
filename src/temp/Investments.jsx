@@ -1,6 +1,4 @@
-// Investments.jsx
 import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import { Flowbite } from "flowbite-react";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
@@ -13,14 +11,13 @@ function Investments() {
   const [selectedScarabs, setSelectedScarabs] = useState([]);
   const [selectedDeliriumOrbs, setSelectedDeliriumOrbs] = useState([]);
   const [selectedMaps, setSelectedMaps] = useState([]);
-  const [selectedMapDeviceCraft, setSelectedMapDeviceCraft] = useState([]);
+  const [selectedMapDeviceCraft, setSelectedMapDeviceCraft] = useState(null);
   const [selectedCraftingMaterials, setSelectedCraftingMaterials] = useState([]);
   const [scarabs, setScarabs] = useState([]);
   const [maps, setMaps] = useState([]);
   const [deliriumOrbs, setDeliriumOrbs] = useState([]);
   const [deviceCrafts, setDeviceCrafts] = useState([]);
   const [craftingMaterials, setCraftingMaterials] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchScarabs = async () => {
@@ -63,58 +60,24 @@ function Investments() {
       }
     };
 
-    const fetchMaps = async () => {
-      try {
-        const response = await fetch(`${root_url}/api/getMaps`);
-        const data = await response.json();
-        setMaps(data);
-      } catch (error) {
-        console.error("Failed to fetch maps:", error);
-      }
-    };
-
-    fetchMaps();
     fetchScarabs();
     fetchDeliriumOrbs();
     fetchDeviceCrafts();
     fetchCraftingMaterials();
   }, []);
 
-  const handleNext = () => {
-    if (scarabs.length === 0) {
-      console.error("Scarabs data is not yet fetched.");
-      return;
-    }
-  
-    const selectedItems = {
-      scarabs: selectedScarabs.map(name => ({
-        name,
-        icon_url: scarabs.find(item => item.name === name).icon_url
-      })),
-      deliriumOrbs: selectedDeliriumOrbs.map(name => ({
-        name,
-        icon_url: deliriumOrbs.find(item => item.name === name).icon_url
-      })),
-      mapDeviceCraft: selectedMapDeviceCraft.map(name => ({
-        name,
-        icon_url: deviceCrafts.find(item => item.name === name).icon_url
-      })),
-      maps: selectedMaps.map(name => ({
-        name,
-        icon_url: maps.find(item => item.name === name).icon_url
-      })),
-      craftingMaterials: selectedCraftingMaterials.map(name => ({
-        name,
-        icon_url: craftingMaterials.find(item => item.name === name).icon_url
-      }))
+  const handleCalculate = () => {
+    const data = {
+      scarabs: selectedScarabs,
+      deliriumOrbs: selectedDeliriumOrbs,
+      mapDeviceCraft: selectedMapDeviceCraft,
+      maps: selectedMaps,
+      craftingMaterials: selectedCraftingMaterials,
     };
-  
-    console.log("Selected items before navigation:", selectedItems);
-    navigate("/quantity-selection", { state: { selectedItems } });
+
+    alert(`Selected Data: ${JSON.stringify(data, null, 2)}`);
+    console.log(JSON.stringify(data, null, 2));
   };
-  
-  
-  
 
   const handleScarabsChange = useCallback((selected) => {
     setSelectedScarabs(selected);
@@ -128,12 +91,12 @@ function Investments() {
     setSelectedMapDeviceCraft(selected);
   }, []);
 
-  const handleMapChange = useCallback((selected) => {
-    setSelectedMaps(selected);
-  }, []);
-
   const handleCraftingMaterialsChange = useCallback((selected) => {
     setSelectedCraftingMaterials(selected);
+  }, []);
+
+  const handleMapChange = useCallback((selected) => {
+    setSelectedMaps(selected);
   }, []);
 
   return (
@@ -141,6 +104,7 @@ function Investments() {
       <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900">
         <Header />
         <main className="flex flex-col my-36 gap-10 items-center text-center">
+          {/* Scarabs */}
           <SelectableInvestmentGroup
             title="Scarabs"
             hasSearch={true}
@@ -148,44 +112,50 @@ function Investments() {
             limit={4}
             onSelectionChange={handleScarabsChange}
           />
+          {/* Maps */}
           <MapInvestmentGroup
             title="Maps"
             limit={1}
             onSelectionChange={handleMapChange}
-            />
-            <SelectableInvestmentGroup
-              title="Delirium Orbs"
-              hasSearch={true}
-              content={deliriumOrbs}
-              limit={5}
-              onSelectionChange={handleDeliriumOrbsChange}
-            />
-            <OptionInvestmentGroup
-              title="Map Device Craft"
-              hasSearch={true}
-              content={deviceCrafts}
-              limit={1}
-              onSelectionChange={handleMapDeviceCraftChange}
-            />
-            <SelectableInvestmentGroup
-              title="Crafting Materials"
-              hasSearch={true}
-              content={craftingMaterials}
-              limit={4}
-              onSelectionChange={handleCraftingMaterialsChange}
-            />
-            <button
-              className="btn text-white bg-pink-700 hover:bg-pink-800 active:bg-pink-900 shadow-xl select-none pointer-events-auto text-xl px-8 py-3 rounded-lg transition duration-150 ease-in-out"
-              onClick={handleNext}
-            >
-              Next
-            </button>
-          </main>
-          <Footer />
-        </div>
-      </Flowbite>
-    );
-  }
-  
-  export default Investments;
-  
+          />
+          {/* Delirium Orbs */}
+          <SelectableInvestmentGroup
+            title="Delirium Orbs"
+            hasSearch={true}
+            content={deliriumOrbs}
+            limit={5}
+            hasQuantities={true}  // Enable quantity selection
+            onSelectionChange={handleDeliriumOrbsChange}
+          />
+          {/* Device Crafts */}
+          <OptionInvestmentGroup
+            title="Map Device Craft"
+            hasSearch={true}
+            content={deviceCrafts}
+            limit={1}
+            onSelectionChange={handleMapDeviceCraftChange}
+          />
+          {/* Crafting Materials */}
+          <SelectableInvestmentGroup
+            title="Crafting Materials"
+            hasSearch={true}
+            content={craftingMaterials}
+            limit={5}
+            hasQuantities={true}  // Enable quantity selection
+            onSelectionChange={handleCraftingMaterialsChange}
+          />
+          {/* Calculate Button */}
+          <button
+            className="btn text-white bg-pink-700 hover:bg-pink-800 active:bg-pink-900 shadow-xl select-none pointer-events-auto text-xl px-8 py-3 rounded-lg transition duration-150 ease-in-out"
+            onClick={handleCalculate}
+          >
+            Calculate
+          </button>
+        </main>
+        <Footer />
+      </div>
+    </Flowbite>
+  );
+}
+
+export default Investments;

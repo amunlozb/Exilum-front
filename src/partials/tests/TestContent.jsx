@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
 import { getAuth } from "firebase/auth";
+import root_url from "../../const/root_url";
 
 function TestContent() {
     const fetchEndpoint = async (url) => {
         try {
-            const response = await fetch(url, { credentials: "include" });
+            const response = await fetch(`${root_url}${url}`, { credentials: "include" });
             console.log(response);
             const data = await response;
         } catch (error) {
@@ -14,15 +15,15 @@ function TestContent() {
     };
 
     const handleFetchPublic = () => {
-        fetchEndpoint("https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/public");
+        fetchEndpoint("/api/test/public");
     };
 
     const handleFetchAuthenticated = () => {
-        fetchEndpoint("https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/authenticated");
+        fetchEndpoint("/api/test/authenticated");
     };
 
     const handleFetchAdmin = () => {
-        fetchEndpoint("https://exilum-back-c24f5etkvq-ey.a.run.app/api/test/admin");
+        fetchEndpoint("/api/test/admin");
     };
 
     const handleFetchLogout = async () => {
@@ -31,7 +32,7 @@ function TestContent() {
 
         try {
             await axios.post(
-                "https://exilum-back-c24f5etkvq-ey.a.run.app/api/auth/signout",
+                "/api/auth/signout",
                 {},
                 {
                     headers: {

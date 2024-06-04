@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../partials/Header';
-import AdminHeader from '../partials/admin/AdminHeader';
 import HeroHome from '../partials/home/HeroHome';
 import FeaturesHome from '../partials/home/Features';
 import FeaturesBlocks from '../partials/home/FeaturesBlocks';

@@ -9,6 +9,8 @@ import {
   signInWithEmailAndPassword
 } from "firebase/auth";
 
+import root_url from "../const/root_url";
+
 import axios from "axios";
 
 function SignIn() {
@@ -32,13 +34,13 @@ function SignIn() {
 
       // Send POST request to endpoint
       const role = await axios.post(
-        "https://exilum-back-c24f5etkvq-ey.a.run.app/api/auth/signin",
+        `${root_url}/api/auth/signin`,
         {},
         {
           headers: {
-        "Content-Type": "application/json",
-        "Authorization": userToken,
-        "uid": user.uid,
+            "Content-Type": "application/json",
+            "Authorization": userToken,
+            "uid": user.uid,
           },
           withCredentials: true, 
         }
