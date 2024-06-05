@@ -25,7 +25,7 @@ function Investments() {
   useEffect(() => {
     const fetchScarabs = async () => {
       try {
-        const response = await fetch("https://exilum-back-c24f5etkvq-ey.a.run.app/api/getScarabs");
+        const response = await fetch(`${root_url}/api/getScarabs`);
         const data = await response.json();
         setScarabs(data);
       } catch (error) {

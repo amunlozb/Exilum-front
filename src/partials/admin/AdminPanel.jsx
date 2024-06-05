@@ -30,7 +30,7 @@ function AdminPanel() {
                             >
                                 <g fill="none" fillRule="evenodd">
                                     <rect
-                                        className="fill-current text-gray-600"
+                                        className="fill-current text-purple-600"
                                         width="64"
                                         height="64"
                                         rx="32"
@@ -74,7 +74,7 @@ function AdminPanel() {
                             >
                                 <g fill="none" fillRule="evenodd">
                                     <rect
-                                        className="fill-current text-gray-600"
+                                        className="fill-current text-purple-600"
                                         width="64"
                                         height="64"
                                         rx="32"
@@ -115,7 +115,7 @@ function AdminPanel() {
                             >
                                 <g fill="none" fillRule="evenodd">
                                     <rect
-                                        className="fill-current text-gray-600"
+                                        className="fill-current text-purple-600"
                                         width="64"
                                         height="64"
                                         rx="32"
