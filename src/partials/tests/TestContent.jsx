@@ -8,7 +8,7 @@ function TestContent() {
         try {
             const response = await fetch(`${root_url}${url}`, { credentials: "include" });
             console.log(response);
-            const data = await response;
+            return response;
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -24,6 +24,10 @@ function TestContent() {
 
     const handleFetchAdmin = () => {
         fetchEndpoint("/api/test/admin");
+    };
+
+    const handleFetchRoles = () => {
+        const res = fetchEndpoint("/api/web/getRoles");
     };
 
     const handleFetchLogout = async () => {
@@ -55,7 +59,7 @@ function TestContent() {
             <button className="bg-green-400" onClick={handleFetchPublic}>Fetch Public Endpoint</button>
             <button className="bg-green-400" onClick={handleFetchAuthenticated}>Fetch Authenticated Endpoint</button>
             <button className="bg-green-400" onClick={handleFetchAdmin}>Fetch Admin Endpoint</button>
-            <button className="bg-green-400" onClick={handleFetchLogout}>Logout</button>
+            <button className="bg-green-400" onClick={handleFetchRoles}>Fetch Admin Endpoint</button>
         </div>
     );
 }
