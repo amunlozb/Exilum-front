@@ -24,7 +24,7 @@ function Header() {
     };
     window.addEventListener("scroll", scrollHandler);
     return () => window.removeEventListener("scroll", scrollHandler);
-  }, [top]);
+  }, []);
 
   useEffect(() => {
     const auth = getAuth();
@@ -33,6 +33,14 @@ function Header() {
         setUser(user);
         const role = sessionStorage.getItem("role");
         setIsAdmin(role === "ADMIN");
+        const storedPhotoURL = sessionStorage.getItem("user_photoURL");
+        if (storedPhotoURL) {
+          setUserPhoto(storedPhotoURL);
+        } else if (user.photoURL) {
+          // Update session storage if the user has a photoURL
+          sessionStorage.setItem("user_photoURL", user.photoURL);
+          setUserPhoto(user.photoURL);
+        }
       } else {
         setUser(null);
         setIsAdmin(false);
@@ -55,14 +63,6 @@ function Header() {
       console.log(error);
     }
   };
-
-  // Get avatar URL (if it exists)
-  useEffect(() => {
-    const storedPhotoURL = sessionStorage.getItem("user_photoURL");
-    if (storedPhotoURL) {
-      setUserPhoto(storedPhotoURL);
-    }
-  }, []);
 
   return (
     <header

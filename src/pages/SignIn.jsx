@@ -69,11 +69,25 @@ function SignIn() {
   
       // The signed-in user info.
       const user = result.user;
-      console.log(user);
-      const token = await user.getIdToken();
-      console.log(token);
-      console.log(user.photoURL);
+      const userToken = await user.getIdToken();
       sessionStorage.setItem("user_photoURL", user.photoURL);
+
+      // Send POST request to endpoint
+      const role = await axios.post(
+        `${root_url}/api/auth/signin`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: userToken,
+            uid: user.uid,
+          },
+          withCredentials: true,
+        }
+      );
+
+      console.log(role.data);
+      sessionStorage.setItem("role", role.data[0]);
     } catch (error) {
       console.error("Error signing in with Google:", error);
     }
