@@ -15,6 +15,7 @@ function Header() {
   const [top, setTop] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [user, setUser] = useState(null);
+  const [userPhoto, setUserPhoto] = useState(null);
 
   // detect whether user has scrolled the page down by 10px
   useEffect(() => {
@@ -45,6 +46,7 @@ function Header() {
       const auth = getAuth();
       await signOut(auth);
       sessionStorage.removeItem("role");
+      sessionStorage.removeItem("user_photoURL");
       // Redirect to home page
       console.log("SIGNING OUT SUCCESSFULLY");
       window.location.href = "/";
@@ -53,6 +55,14 @@ function Header() {
       console.log(error);
     }
   };
+
+  // Get avatar URL (if it exists)
+  useEffect(() => {
+    const storedPhotoURL = sessionStorage.getItem("user_photoURL");
+    if (storedPhotoURL) {
+      setUserPhoto(storedPhotoURL);
+    }
+  }, []);
 
   return (
     <header
@@ -139,6 +149,7 @@ function Header() {
                 inline
                 label={
                   <Avatar
+                    img={userPhoto ? userPhoto : undefined}
                     alt="User settings"
                     rounded
                   />

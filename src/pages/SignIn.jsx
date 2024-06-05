@@ -11,8 +11,12 @@ import axios from "axios";
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: "select_account"
+  })
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -53,22 +57,28 @@ function SignIn() {
     }
   };
 
-  const provider = new GoogleAuthProvider();
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
   
-  const handleGoogleSignIn = async () => {
     try {
-      const auth = getAuth();
+      // Sign in using a popup.
       const provider = new GoogleAuthProvider();
-
-      await signInWithPopup(auth, provider);
-
-      // Redirect to home page
-      console.log("User signed in successfully!"); 
-      window.location.href = "/"; 
+      provider.addScope('profile');
+      provider.addScope('email');
+      const result = await signInWithPopup(auth, provider);
+  
+      // The signed-in user info.
+      const user = result.user;
+      console.log(user);
+      const token = await user.getIdToken();
+      console.log(token);
+      console.log(user.photoURL);
+      sessionStorage.setItem("user_photoURL", user.photoURL);
     } catch (error) {
       console.error("Error signing in with Google:", error);
     }
   };
+  
   
   return (
     <Flowbite>
