@@ -10,8 +10,7 @@ import { Flowbite } from "flowbite-react";
 
 function AdminStats() {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // Add loading state
-  const auth = getAuth();
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     const unsubscribe = getAuth().onAuthStateChanged((user) => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import root_url from "../const/root_url";
 import axios from "axios";
-import { getAuth } from "firebase/auth"; // Import getIdToken
+import { getAuth } from "firebase/auth"; 
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
 import { Flowbite } from "flowbite-react";
@@ -9,8 +9,7 @@ import AdminPanel from "../partials/admin/AdminPanel";
 
 function Admin() {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // Add loading state
-  const auth = getAuth();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = getAuth().onAuthStateChanged((user) => {
