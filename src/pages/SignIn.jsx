@@ -86,8 +86,8 @@ function SignIn() {
         }
       );
 
-      console.log(role.data);
       sessionStorage.setItem("role", role.data[0]);
+      window.location.href = "/";
     } catch (error) {
       console.error("Error signing in with Google:", error);
     }
