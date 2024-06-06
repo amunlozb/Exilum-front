@@ -18,11 +18,11 @@ const MapInvestmentGroup = ({ title, limit, onSelectionChange }) => {
 
   useEffect(() => {
     const fetchMaps = async () => {
-      const whiteMaps = await fetch(`${root_url}/api/getMapsByTierTest?inputTier=WHITE`).then((res) => res.json());
-      const yellowMaps = await fetch(`${root_url}/api/getMapsByTierTest?inputTier=YELLOW`).then((res) => res.json());
-      const redMaps = await fetch(`${root_url}/api/getMapsByTierTest?inputTier=RED`).then((res) => res.json());
-      const t17Maps = await fetch(`${root_url}/api/getMapsByTierTest?inputTier=T17`).then((res) => res.json());
-      const otherMaps = await fetch(`${root_url}/api/getMapsByTierTest?inputTier=OTHER`).then((res) => res.json());
+      const whiteMaps = await fetch(`${root_url}/api/getMapsByTier?inputTier=WHITE`).then((res) => res.json());
+      const yellowMaps = await fetch(`${root_url}/api/getMapsByTier?inputTier=YELLOW`).then((res) => res.json());
+      const redMaps = await fetch(`${root_url}/api/getMapsByTier?inputTier=RED`).then((res) => res.json());
+      const t17Maps = await fetch(`${root_url}/api/getMapsByTier?inputTier=T17`).then((res) => res.json());
+      const otherMaps = await fetch(`${root_url}/api/getMapsByTier?inputTier=OTHER`).then((res) => res.json());
       const blightedMaps = await fetch(`${root_url}/api/getBlightedMaps`).then((res) => res.json());
 
       setMaps({
