@@ -34,7 +34,7 @@ function HeroHome() {
                 calculate the profit for your Path of Exile farming strategy.
               </p>
               <div
-                className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center gap-4"
+                className="max-w-xs mx-auto sm:max-w-none flex justify-center gap-4"
                 data-aos="zoom-y-out"
                 data-aos-delay="300"
               >

@@ -1,4 +1,3 @@
-// ItemCategory.jsx
 import React from "react";
 
 function ItemCategory({
@@ -8,6 +7,9 @@ function ItemCategory({
   handleQuantityChange,
   hasInput,
   showImage = true,
+  maxQuantity = 5,
+  maxSelectedItems,
+  totalSelectedItems,
 }) {
   return (
     <div>
@@ -26,12 +28,12 @@ function ItemCategory({
             </div>
             {hasInput && (
               <form className="flex flex-col items-center">
-                {/* <label
+                <label
                   htmlFor={`quantity-input-${index}`}
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Choose quantity:
-                </label> */}
+                </label>
                 <div className="flex items-center">
                   <button
                     type="button"
@@ -67,20 +69,29 @@ function ItemCategory({
                       handleQuantityChange(item.name, e.target.value)
                     }
                     min={1}
-                    max={5}
+                    max={maxQuantity}
                     className="bg-white border-t border-b border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-16 py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="999"
                     required
                   />
                   <button
                     type="button"
-                    onMouseDown={() =>
+                    onClick={() =>
                       handleQuantityChange(
                         item.name,
-                        Math.min((quantities[item.name] || 0) + 1, 5)
+                        Math.min((quantities[item.name] || 0) + 1, maxQuantity)
                       )
                     }
-                    className="bg-white dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-r-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                    disabled={
+                      maxSelectedItems &&
+                      totalSelectedItems >= maxSelectedItems
+                    }
+                    className={`bg-white dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-r-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none ${
+                      maxSelectedItems &&
+                      totalSelectedItems >= maxSelectedItems
+                        ? "opacity-50 cursor-not-allowed"
+                        : ""
+                    }`}
                   >
                     <svg
                       className="w-3 h-3 text-gray-900 dark:text-white"
@@ -100,7 +111,7 @@ function ItemCategory({
                   </button>
                 </div>
                 <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                  Please select a number between 1 and 5.
+                   1 - {maxQuantity}
                 </p>
               </form>
             )}

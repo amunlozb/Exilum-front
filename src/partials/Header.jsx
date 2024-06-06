@@ -1,12 +1,21 @@
+// Header.jsx
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, DarkThemeToggle } from "flowbite-react";
+import {
+  Navbar,
+  DarkThemeToggle,
+  Dropdown,
+  Avatar,
+} from "flowbite-react";
+import { getAuth, signOut } from "firebase/auth";
 
 // TODO: center collapsable items to center
 
 function Header() {
   const [top, setTop] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [user, setUser] = useState(null);
+  const [userPhoto, setUserPhoto] = useState(null);
 
   // detect whether user has scrolled the page down by 10px
   useEffect(() => {
@@ -15,12 +24,45 @@ function Header() {
     };
     window.addEventListener("scroll", scrollHandler);
     return () => window.removeEventListener("scroll", scrollHandler);
-  }, [top]);
+  }, []);
 
   useEffect(() => {
-    const role = sessionStorage.getItem("role");
-    setIsAdmin(role === "ADMIN");
+    const auth = getAuth();
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+        const role = sessionStorage.getItem("role");
+        setIsAdmin(role === "ADMIN");
+        const storedPhotoURL = sessionStorage.getItem("user_photoURL");
+        if (storedPhotoURL) {
+          setUserPhoto(storedPhotoURL);
+        } else if (user.photoURL) {
+          // Update session storage if the user has a photoURL
+          sessionStorage.setItem("user_photoURL", user.photoURL);
+          setUserPhoto(user.photoURL);
+        }
+      } else {
+        setUser(null);
+        setIsAdmin(false);
+      }
+    });
+    return unsubscribe;
   }, []);
+
+  const handleSignOut = async () => {
+    try {
+      const auth = getAuth();
+      await signOut(auth);
+      sessionStorage.removeItem("role");
+      sessionStorage.removeItem("user_photoURL");
+      // Redirect to home page
+      console.log("SIGNING OUT SUCCESSFULLY");
+      window.location.href = "/";
+    } catch (error) {
+      console.log("SIGNING OUT FAILED");
+      console.log(error);
+    }
+  };
 
   return (
     <header
@@ -68,7 +110,7 @@ function Header() {
                 <Navbar.Link
                   href="/admin/dashboard"
                   className="md:text-lg text-purple-700 dark:text-purple-500 hover:text-gray-900 dark:hover:text-gray-500
-                    md:px-5 md:py-3 transition duration-150 ease-in-out"
+                    md:px-5 md:py-3 transition duration-150 ease-in-out text-2xl"
                 >
                   Dashboard
                 </Navbar.Link>
@@ -76,7 +118,7 @@ function Header() {
                 <Navbar.Link
                   href="/admin/users"
                   className="md:text-lg text-purple-700 dark:text-purple-500 hover:text-gray-900 dark:hover:text-gray-500
-                    md:px-5 md:py-3 transition duration-150 ease-in-out"
+                    md:px-5 md:py-3 transition duration-150 ease-in-out text-2xl"
                 >
                   Users
                 </Navbar.Link>
@@ -87,7 +129,7 @@ function Header() {
             <Navbar.Link
               href="/investments"
               className="md:text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500
-                    md:px-5 md:py-3 transition duration-150 ease-in-out"
+                    md:px-5 md:py-3 transition duration-150 ease-in-out text-2xl"
             >
               Investments
             </Navbar.Link>
@@ -95,17 +137,38 @@ function Header() {
             <Navbar.Link
               href="/tests"
               className="md:text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500
-                    md:px-5 md:py-3 transition duration-150 ease-in-out"
+                    md:px-5 md:py-3 transition duration-150 ease-in-out text-2xl"
             >
               Tests
             </Navbar.Link>
 
-            {!isAdmin && (
+            {/* Auth links */}
+            {user ? (
+              <Dropdown
+                arrowIcon={false}
+                inline
+                label={
+                  <Avatar
+                    img={userPhoto ? userPhoto : undefined}
+                    alt="User settings"
+                    rounded
+                    referrerPolicy="no-referrer"
+                  />
+                }
+              >
+                <Dropdown.Header>
+                  <span className="block text-sm text-gray-600 dark:text-white">{user.email}</span>
+                </Dropdown.Header>
+                <Dropdown.Item onClick={handleSignOut}>
+                  Sign out
+                </Dropdown.Item>
+              </Dropdown>
+            ) : (
               <>
                 <Navbar.Link
                   href="/signin"
                   className="md:text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500
-                    md:px-5 md:py-3 transition duration-150 ease-in-out"
+                        md:px-5 md:py-3 transition duration-150 ease-in-out text-2xl"
                 >
                   Sign in
                 </Navbar.Link>
@@ -113,7 +176,7 @@ function Header() {
                 <Navbar.Link
                   href="/signup"
                   className="md:text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500
-                    md:px-5 md:py-3 transition duration-150 ease-in-out flex items-center"
+                        md:px-5 md:py-3 transition duration-150 ease-in-out flex items-center text-2xl"
                 >
                   Sign up
                   <svg

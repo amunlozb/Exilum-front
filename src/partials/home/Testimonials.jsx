@@ -31,7 +31,7 @@ function Testimonials() {
                 <blockquote className="text-xl font-medium mb-4 dark:text-white text-pretty">
                   “I love this product and would recommend it to anyone. Couldn't be easier to use, it saved me countless hours of calculations “
                 </blockquote>
-                <cite className="block font-bold text-lg dark:text-white not-italic">Brignirs Garf</cite>S
+                <cite className="block font-bold text-lg dark:text-white not-italic">Brignirs Garf</cite>
                 <div className="text-slate-500 dark:text-slate-400">
                   <span>Veteran <a className="text-blue-600 dark:text-blue-700 hover:underline" href="https://www.pathofexile.com/">Path of Exile</a> player </span>
                 </div>
