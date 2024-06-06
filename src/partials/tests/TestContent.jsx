@@ -6,7 +6,19 @@ import root_url from "../../const/root_url";
 function TestContent() {
     const fetchEndpoint = async (url) => {
         try {
-            const response = await fetch(`${root_url}${url}`, { credentials: "include" });
+            const user = getAuth().currentUser;
+            const headers = {};
+
+            if (user) {
+                const userToken = await user.getIdToken();
+                headers["Authorization"] = `Bearer ${userToken}`;
+            }
+
+            const response = await fetch(`${root_url}${url}`, {
+                credentials: "include",
+                headers: headers,
+            });
+
             console.log(response);
             return response;
         } catch (error) {
@@ -26,40 +38,11 @@ function TestContent() {
         fetchEndpoint("/api/test/admin");
     };
 
-    const handleFetchRoles = () => {
-        const res = fetchEndpoint("/api/web/getRoles");
-    };
-
-    const handleFetchLogout = async () => {
-        const user = getAuth().currentUser;
-        const uid = user.uid;
-
-        try {
-            await axios.post(
-                "/api/auth/signout",
-                {},
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": await user.getIdToken(),
-                        "uid": uid,
-                    },
-                }
-            );
-
-            sessionStorage.removeItem("role");
-            window.location.reload();
-        } catch (error) {
-            console.error("Error signing out:", error);
-        }
-    };
-
     return (
         <div className="flex gap-4 justify-center mt-40">
             <button className="bg-green-400" onClick={handleFetchPublic}>Fetch Public Endpoint</button>
             <button className="bg-green-400" onClick={handleFetchAuthenticated}>Fetch Authenticated Endpoint</button>
             <button className="bg-green-400" onClick={handleFetchAdmin}>Fetch Admin Endpoint</button>
-            <button className="bg-green-400" onClick={handleFetchRoles}>Fetch Admin Endpoint</button>
         </div>
     );
 }
