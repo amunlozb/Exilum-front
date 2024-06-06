@@ -42,6 +42,9 @@ function QuantitySelection() {
   const selectedMaps = selectedItems.maps || [];
   const selectedCraftingMaterials = selectedItems.craftingMaterials || [];
 
+  const totalSelectedScarabs = selectedScarabs.reduce((acc, item) => acc + (quantities[item.name] || 0), 0);
+  const totalSelectedDeliriumOrbs = selectedDeliriumOrbs.reduce((acc, item) => acc + (quantities[item.name] || 0), 0);
+
   return (
     <Flowbite>
       <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900 dark:text-white">
@@ -57,6 +60,8 @@ function QuantitySelection() {
               handleQuantityChange={handleQuantityChange}
               hasInput={true}
               showImage={true}
+              maxSelectedItems={4}
+              totalSelectedItems={totalSelectedScarabs}
             />
             <ItemCategory
               categoryTitle="Delirium Orbs"
@@ -65,6 +70,8 @@ function QuantitySelection() {
               handleQuantityChange={handleQuantityChange}
               hasInput={true}
               showImage={true}
+              maxSelectedItems={5}
+              totalSelectedItems={totalSelectedDeliriumOrbs}
             />
             <ItemCategory
               categoryTitle="Maps"
