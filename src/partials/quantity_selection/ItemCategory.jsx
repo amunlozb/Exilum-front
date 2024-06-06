@@ -28,6 +28,12 @@ function ItemCategory({
             </div>
             {hasInput && (
               <form className="flex flex-col items-center">
+                <label
+                  htmlFor={`quantity-input-${index}`}
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Choose quantity:
+                </label>
                 <div className="flex items-center">
                   <button
                     type="button"
@@ -105,7 +111,7 @@ function ItemCategory({
                   </button>
                 </div>
                 <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                  Please select a number between 1 and {maxQuantity}.
+                   1 - {maxQuantity}
                 </p>
               </form>
             )}

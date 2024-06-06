@@ -152,6 +152,7 @@ function Header() {
                     img={userPhoto ? userPhoto : undefined}
                     alt="User settings"
                     rounded
+                    referrerPolicy="no-referrer"
                   />
                 }
               >
