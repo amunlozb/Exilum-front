@@ -26,13 +26,16 @@ function QuantitySelection() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Selected items with quantities:");
-    for (const [itemName, quantity] of Object.entries(quantities)) {
-      console.log(`${itemName}: ${quantity}`);
-    }
+    const result = {
+      scarabs: selectedItems.scarabs.map(item => ({ name: item.name, quantity: quantities[item.name] })),
+      deliriumOrbs: selectedItems.deliriumOrbs.map(item => ({ name: item.name, quantity: quantities[item.name] })),
+      mapDeviceCraft: selectedItems.mapDeviceCraft.map(item => ({ name: item.name, quantity: quantities[item.name] })),
+      maps: selectedItems.maps.map(item => ({ name: item.name, quantity: quantities[item.name] })),
+      craftingMaterials: selectedItems.craftingMaterials.map(item => ({ name: item.name, quantity: quantities[item.name] })),
+    };
+    console.log("Selected items with quantities:", JSON.stringify(result, null, 2));
   };
 
-  // Extracting selected items from selectedItems object
   const selectedScarabs = selectedItems.scarabs || [];
   const selectedDeliriumOrbs = selectedItems.deliriumOrbs || [];
   const selectedMapDeviceCraft = selectedItems.mapDeviceCraft || [];
@@ -63,12 +66,12 @@ function QuantitySelection() {
               hasInput={true}
               showImage={true}
             />
-              <ItemCategory
-                categoryTitle="Map"
-                items={selectedMaps}
-                hasInput={false}
-                showImage={true}
-              />
+            <ItemCategory
+              categoryTitle="Maps"
+              items={selectedMaps}
+              hasInput={false}
+              showImage={true}
+            />
             <ItemCategory
               categoryTitle="Map Device Craft"
               items={selectedMapDeviceCraft}
@@ -82,6 +85,7 @@ function QuantitySelection() {
               handleQuantityChange={handleQuantityChange}
               hasInput={true}
               showImage={true}
+              maxQuantity={20}
             />
 
             <div className="mt-8">
