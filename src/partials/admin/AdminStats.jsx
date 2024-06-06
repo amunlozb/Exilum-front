@@ -57,7 +57,7 @@ function AdminStats() {
         <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900">
           <Header />
           <main className="flex-grow flex justify-center items-center">
-            <h1 className="text-5xl">Checking admin status...</h1> <br />
+            <h1 className="text-5xl dark:text-white">Checking admin status...</h1> <br />
           </main>
           <Footer />
         </div>
@@ -71,7 +71,7 @@ function AdminStats() {
         <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900">
           <Header />
           <main className="flex-grow flex justify-center items-center">
-            <h1 className="text-5xl">Nice try :)</h1> <br />
+            <h1 className="text-5xl dark:text-white">Nice try :)</h1> <br />
           </main>
           <Footer />
         </div>
