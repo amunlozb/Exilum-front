@@ -18,13 +18,13 @@ function ItemCategory({
         {items.map((item, index) => (
           <div
             key={index}
-            className="flex items-center justify-between bg-gray-100 dark:bg-gray-800 p-4 rounded-lg w-full"
+            className="flex items-center justify-between bg-gray-100 dark:bg-gray-800 p-4 rounded-lg w-full shadow-xl"
           >
             <div className="flex items-center space-x-4 w-full">
               {showImage && (
                 <img src={item.icon_url} alt={item.name} className="w-9 h-9" />
               )}
-              <span className="flex-1">{item.name}</span>
+              <span className="flex-1 px-10">{item.name}</span>
             </div>
             {hasInput && (
               <form className="flex flex-col items-center">
