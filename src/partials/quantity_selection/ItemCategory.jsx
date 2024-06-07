@@ -30,7 +30,7 @@ function ItemCategory({
               <form className="flex flex-col items-center">
                 <label
                   htmlFor={`quantity-input-${index}`}
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-extralight text-gray-500 dark:text-gray-300"
                 >
                   Choose quantity:
                 </label>
@@ -110,9 +110,9 @@ function ItemCategory({
                     </svg>
                   </button>
                 </div>
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                {/* <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                    1 - {maxQuantity}
-                </p>
+                </p> */}
               </form>
             )}
           </div>
