@@ -19,6 +19,7 @@ import Admin from './pages/Admin';
 import { auth } from "./firebase";
 import Tests from './pages/Tests';
 import QuantitySelection from './pages/QuantitySelection';
+import Summary from "./pages/Summary";
 import AdminStats from "./partials/admin/AdminStats"
 
 function App() {  
@@ -53,6 +54,7 @@ function App() {
         <Route path="/admin/stats" element={<AdminStats />} />
         <Route path="/tests" element={<Tests />} />
         <Route path="/quantity-selection" element={<QuantitySelection/>} />
+        <Route path="/summary" element={<Summary />} />
       </Routes>
     </>
   );

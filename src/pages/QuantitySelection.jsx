@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { Flowbite } from "flowbite-react";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
 import ItemCategory from "../partials/quantity_selection/ItemCategory"; 
+import axios from 'axios';
+import root_url from "../const/root_url";
 
 function QuantitySelection() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { selectedItems } = location.state;
 
   const initialQuantities = Object.values(selectedItems).flat().reduce((acc, item) => {
@@ -24,16 +27,52 @@ function QuantitySelection() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = {
-      scarabs: selectedItems.scarabs.map(item => ({ name: item.name, quantity: quantities[item.name] })),
-      deliriumOrbs: selectedItems.deliriumOrbs.map(item => ({ name: item.name, quantity: quantities[item.name] })),
-      mapDeviceCraft: selectedItems.mapDeviceCraft.map(item => ({ name: item.name, quantity: quantities[item.name] })),
-      maps: selectedItems.maps.map(item => ({ name: item.name, quantity: quantities[item.name] })),
-      craftingMaterials: selectedItems.craftingMaterials.map(item => ({ name: item.name, quantity: quantities[item.name] })),
+
+    const requestBody = {
+      scarabs: selectedItems.scarabs.map((item) => ({
+        name: item.name,
+        quantity: quantities[item.name],
+        icon_url: item.icon_url, // Ensure icon_url is included in requestBody
+      })),
+      deliriumOrbs: selectedItems.deliriumOrbs.map((item) => ({
+        name: item.name,
+        quantity: quantities[item.name],
+        icon_url: item.icon_url, // Ensure icon_url is included in requestBody
+      })),
+      mapDeviceCraft: selectedItems.mapDeviceCraft.map((item) => ({
+        name: item.name,
+        quantity: quantities[item.name],
+        icon_url: item.icon_url, // Ensure icon_url is included in requestBody
+      })),
+      maps: selectedItems.maps.map((item) => ({
+        name: item.name,
+        quantity: quantities[item.name],
+        icon_url: item.icon_url, // Ensure icon_url is included in requestBody
+      })),
+      craftingMaterials: selectedItems.craftingMaterials.map((item) => ({
+        name: item.name,
+        quantity: quantities[item.name],
+        icon_url: item.icon_url, // Ensure icon_url is included in requestBody
+      })),
     };
-    console.log("Selected items with quantities:", JSON.stringify(result, null, 2));
+
+    try {
+      const response = await axios.post(
+        `${root_url}/api/strategy/price`,
+        requestBody
+      );
+
+      console.log("Response from Server:", response.data); // Debugging line
+
+      // No need to combine prices with images here, as requestBody already has it
+      navigate("/summary", {
+        state: { selectedItems: requestBody, prices: response.data }, // Pass requestBody instead of modifying it
+      });
+    } catch (error) {
+      console.error("Error fetching prices:", error);
+    }
   };
 
   const selectedScarabs = selectedItems.scarabs || [];
@@ -100,7 +139,7 @@ function QuantitySelection() {
                 className="bg-blue-500 text-white px-4 py-2 rounded-md mr-4"
                 onClick={handleSubmit}
               >
-                Submit
+                Calculate
               </button>
               <Link to="/" className="text-blue-500">
                 Cancel
