@@ -70,7 +70,7 @@ function Summary() {
                   items.map((item) => ( // Iterate over items within each category
                     <tr key={item.name}>
                       {/* Image cell */}
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap flex justify-center">
                         <img
                           src={item.icon_url} 
                           alt={item.name}
