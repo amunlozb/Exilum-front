@@ -77,7 +77,7 @@ function UserStatistics() {
   }, []); 
 
   return (
-    <div className="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+    <div className="max-w-sm w-full bg-white rounded-lg shadow-lg dark:bg-gray-900 p-4 md:p-6 dark:shadow-black">
       <div id="area-chart" ref={chartRef} /> 
       </div>
   );
