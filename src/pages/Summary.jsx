@@ -8,8 +8,6 @@ function Summary() {
   const location = useLocation();
   const { prices } = location.state;
 
-  console.log(prices);
-
   const calculateTotalPrice = () => {
     let total = 0;
     for (const category in prices) {
@@ -28,10 +26,10 @@ function Summary() {
         <Header />
         <main className="flex flex-col my-20 gap-10 items-center text-center">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold">Summary</h2>
+            <h2 className="text-4xl font-bold py-5">Summary</h2>
 
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50 dark:bg-gray-700">
+            <table className="min-w-full divide-y divide-gray-400 border-gray-800 rounded-lg">
+              <thead className="bg-gray-50 dark:bg-gray-800 dark:border-white">
                 <tr>
                   {/* Image column */}
                   <th
@@ -67,7 +65,7 @@ function Summary() {
                 </tr>
               </thead>
 
-               <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+               <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
                 {Object.entries(prices).map(([category, items]) =>  // Iterate over categories
                   items.map((item) => ( // Iterate over items within each category
                     <tr key={item.name}>
@@ -99,9 +97,11 @@ function Summary() {
               <tfoot>
                 <tr>
                   <td colSpan={4} className="px-6 py-4 text-right font-bold">
-                    Total:
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-400 h3 px-6">
+                {/* Total */}
+              </span>
                   </td>
-                  <td className="px-6 py-4 font-bold">{totalPrice}</td>
+                  <td className="px-6 py-4 font-bold bg-gradient-to-r from-purple-500 to-pink-400 rounded-b-lg text-white">{totalPrice}</td>
                 </tr>
               </tfoot>
             </table>
