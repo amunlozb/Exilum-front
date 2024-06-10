@@ -3,13 +3,13 @@ import { useLocation, Link } from "react-router-dom";
 import { Flowbite } from "flowbite-react";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
-import root_url from "../const/root_url";
 
 function Summary() {
   const location = useLocation();
-  const { selectedItems, prices } = location.state;
+  const { prices } = location.state;
 
-  // Calculate the total price
+  console.log(prices);
+
   const calculateTotalPrice = () => {
     let total = 0;
     for (const category in prices) {
@@ -17,8 +17,8 @@ function Summary() {
         total += item.price * item.quantity;
       }
     }
-    return total;
-  };
+    return total.toFixed(2);
+  };  
 
   const totalPrice = calculateTotalPrice();
 
@@ -33,74 +33,75 @@ function Summary() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
+                  {/* Image column */}
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider"
+                    className="px-6 py-3 text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider"
+                  >
+                    Image
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider"
                   >
                     Name
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3  text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider"
+                    className="px-6 py-3  text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider"
                   >
                     Quantity
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider"
+                    className="px-6 py-3 text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider"
                   >
                     Price Per Unit
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3  text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider"
+                    className="px-6 py-4  text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider"
                   >
                     Total Price
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                {Object.entries(prices).map(([category, items]) =>
-                  items.map((item) => {
-                    // Find the matching item in selectedItems to get the icon_url
-                    const selectedItem = selectedItems[category]?.find(
-                      (i) => i.name === item.name
-                    );
 
-                    return (
-                      <tr key={item.name}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                          {selectedItem?.icon_url && ( 
-                            <img
-                              src={selectedItem.icon_url}
-                              alt={item.name}
-                              className="inline-block h-6 w-6 mr-2"
-                            />
-                          )}
-                          {item.name}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
-                          {item.quantity}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
-                          {item.price}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
-                          {item.price * item.quantity} 
-                        </td>
-                      </tr>
-                    );
-                  })
+               <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                {Object.entries(prices).map(([category, items]) =>  // Iterate over categories
+                  items.map((item) => ( // Iterate over items within each category
+                    <tr key={item.name}>
+                      {/* Image cell */}
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <img
+                          src={item.icon_url} 
+                          alt={item.name}
+                          className="h-10 w-10 rounded-full object-cover"
+                        />
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-md text-gray-900 dark:text-white">
+                        {item.name}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
+                        {item.quantity}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
+                        {item.price}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
+                        {item.price * item.quantity}
+                      </td>
+                    </tr>
+                  ))
                 )}
               </tbody>
               {/* TOTAL row */}
               <tfoot>
                 <tr>
-                  <td colSpan={3} className="px-6 py-4 text-right font-bold">
+                  <td colSpan={4} className="px-6 py-4 text-right font-bold">
+                    Total:
                   </td>
-                  <td className="px-6 py-4 font-bold">
-                    {totalPrice}
-                  </td>
+                  <td className="px-6 py-4 font-bold">{totalPrice}</td>
                 </tr>
               </tfoot>
             </table>

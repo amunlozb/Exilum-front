@@ -3,7 +3,7 @@ import { useLocation, Link, useNavigate } from "react-router-dom";
 import { Flowbite } from "flowbite-react";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
-import ItemCategory from "../partials/quantity_selection/ItemCategory"; 
+import ItemCategory from "../partials/quantity_selection/ItemCategory";
 import axios from 'axios';
 import root_url from "../const/root_url";
 
@@ -34,27 +34,27 @@ function QuantitySelection() {
       scarabs: selectedItems.scarabs.map((item) => ({
         name: item.name,
         quantity: quantities[item.name],
-        icon_url: item.icon_url, // Ensure icon_url is included in requestBody
+        icon_url: item.icon_url // Assuming icon_url is passed from previous component
       })),
       deliriumOrbs: selectedItems.deliriumOrbs.map((item) => ({
         name: item.name,
         quantity: quantities[item.name],
-        icon_url: item.icon_url, // Ensure icon_url is included in requestBody
+        icon_url: item.icon_url 
       })),
       mapDeviceCraft: selectedItems.mapDeviceCraft.map((item) => ({
         name: item.name,
         quantity: quantities[item.name],
-        icon_url: item.icon_url, // Ensure icon_url is included in requestBody
+        icon_url: item.icon_url 
       })),
       maps: selectedItems.maps.map((item) => ({
         name: item.name,
         quantity: quantities[item.name],
-        icon_url: item.icon_url, // Ensure icon_url is included in requestBody
+        icon_url: item.icon_url 
       })),
       craftingMaterials: selectedItems.craftingMaterials.map((item) => ({
         name: item.name,
         quantity: quantities[item.name],
-        icon_url: item.icon_url, // Ensure icon_url is included in requestBody
+        icon_url: item.icon_url 
       })),
     };
 
@@ -64,11 +64,9 @@ function QuantitySelection() {
         requestBody
       );
 
-      console.log("Response from Server:", response.data); // Debugging line
-
-      // No need to combine prices with images here, as requestBody already has it
+      console.log("Response from Server:", response.data);
       navigate("/summary", {
-        state: { selectedItems: requestBody, prices: response.data }, // Pass requestBody instead of modifying it
+        state: { prices: response.data }, 
       });
     } catch (error) {
       console.error("Error fetching prices:", error);
