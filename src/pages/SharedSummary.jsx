@@ -14,19 +14,13 @@ function SharedSummary() {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${root_url}/api/share/${uuid}`);
-        console.log("Fetched data:", response.data);
         setPrices(response.data);
       } catch (error) {
         console.error("Error fetching shared data:", error);
       }
     };
-    console.log("Fetching data for uuid:", uuid);
     fetchData();
   }, [uuid]);
-
-  useEffect(() => {
-    console.log("Updated prices:", prices);
-  }, [prices]);
 
   if (!prices) {
     return <div>Loading...</div>;
