@@ -56,8 +56,8 @@ function App() {
         <Route path="/tests" element={<Tests />} />
         <Route path="/quantity-selection" element={<QuantitySelection/>} />
         <Route path="/summary" element={<Summary />} />
-        <Route path="/shared:id" element={<SharedSummary />} />
-      </Routes>
+        <Route path="/shared/:uuid" element={<SharedSummary />} />      
+        </Routes>
     </>
   );
 }

@@ -24,6 +24,7 @@ function Summary() {
 
   const handleShareClick = async () => {
     try {
+      console.log("Prices to share:", prices  )
       const response = await axios.post(`${root_url}/api/share`, prices); 
       const shareUUID = response.data;
       console.log(shareUUID);
