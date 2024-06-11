@@ -21,6 +21,7 @@ import Tests from './pages/Tests';
 import QuantitySelection from './pages/QuantitySelection';
 import Summary from "./pages/Summary";
 import AdminStats from "./partials/admin/AdminStats"
+import SharedSummary from './pages/SharedSummary';
 
 function App() {  
 
@@ -55,6 +56,7 @@ function App() {
         <Route path="/tests" element={<Tests />} />
         <Route path="/quantity-selection" element={<QuantitySelection/>} />
         <Route path="/summary" element={<Summary />} />
+        <Route path="/shared:id" element={<SharedSummary />} />
       </Routes>
     </>
   );
