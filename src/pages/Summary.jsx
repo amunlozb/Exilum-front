@@ -3,6 +3,8 @@ import { useLocation, Link } from "react-router-dom";
 import { Flowbite } from "flowbite-react";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
+import axios from 'axios';
+import root_url from "../const/root_url";
 
 function Summary() {
   const location = useLocation();
@@ -19,6 +21,23 @@ function Summary() {
   };  
 
   const totalPrice = calculateTotalPrice();
+
+  const handleShareClick = async () => {
+    try {
+      const response = await axios.post(`${root_url}/api/share`, prices); 
+      const shareUUID = response.data;
+      console.log(shareUUID);
+      const shareLink = `${window.location.origin}/shared/${shareUUID}`; // Construct shareable link
+
+      // Display the shareLink to the user 
+      // (e.g., using a modal, copying to clipboard, etc.)
+      console.log("Share this link:", shareLink);
+
+    } catch (error) {
+      console.error("Error creating share link:", error);
+      // Handle error, e.g., display an error message to the user
+    }
+  };
 
   return (
     <Flowbite>
@@ -105,7 +124,7 @@ function Summary() {
                 </tr>
               </tfoot>
             </table>
-
+            <button onClick={handleShareClick}>Generate Share Link</button> 
             <div className="mt-8">
               <Link to="/" className="text-blue-500">
                 Go Back

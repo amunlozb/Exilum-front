@@ -66,7 +66,7 @@ function QuantitySelection() {
 
       console.log("Response from Server:", response.data);
       navigate("/summary", {
-        state: { prices: response.data }, 
+        state: { prices: response.data, selectedItems: requestBody }, 
       });
     } catch (error) {
       console.error("Error fetching prices:", error);
