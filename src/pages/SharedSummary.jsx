@@ -8,35 +8,30 @@ import root_url from "../const/root_url";
 
 function SharedSummary() {
   const { uuid } = useParams();
-  const [selectedItems, setSelectedItems] = useState(null);
   const [prices, setPrices] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${root_url}/api/share/${uuid}`);
-        console.log("Fetched data:", response.data); // Log the entire response
-        setSelectedItems(response.data.selectedItems);
+        console.log("Fetched data:", response.data);
         setPrices(response.data);
       } catch (error) {
         console.error("Error fetching shared data:", error);
-        // Consider setting an error state or redirecting to an error page
       }
     };
-
+    console.log("Fetching data for uuid:", uuid);
     fetchData();
   }, [uuid]);
 
-  if (!selectedItems || !prices) {
+  useEffect(() => {
+    console.log("Updated prices:", prices);
+  }, [prices]);
+
+  if (!prices) {
     return <div>Loading...</div>;
   }
 
-  useEffect(() => {
-    console.log("Updated selectedItems:", selectedItems);
-    console.log("Updated prices:", prices);
-  }, [selectedItems, prices]);
-
-  // Calculate total price (same logic as in Summary component)
   const calculateTotalPrice = () => {
     let total = 0;
     for (const category in prices) {
@@ -45,7 +40,7 @@ function SharedSummary() {
       }
     }
     return total.toFixed(2);
-  }; 
+  };
   const totalPrice = calculateTotalPrice();
 
   return (
@@ -54,12 +49,11 @@ function SharedSummary() {
         <Header />
         <main className="flex flex-col my-20 gap-10 items-center text-center">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold py-5">Shared Summary</h2>
+            <h2 className="text-4xl font-bold py-5">Summary</h2>
 
             <table className="min-w-full divide-y divide-gray-400 border-gray-800 rounded-lg">
               <thead className="bg-gray-50 dark:bg-gray-800 dark:border-white">
                 <tr>
-                  {/* Image column */}
                   <th
                     scope="col"
                     className="px-6 py-3 text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider"
@@ -93,14 +87,13 @@ function SharedSummary() {
                 </tr>
               </thead>
 
-               <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
-                {Object.entries(prices).map(([category, items]) =>  // Iterate over categories
-                  items.map((item) => ( // Iterate over items within each category
+              <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                {Object.entries(prices).map(([category, items]) =>
+                  items.map((item) => (
                     <tr key={item.name}>
-                      {/* Image cell */}
                       <td className="px-6 py-4 whitespace-nowrap flex justify-center">
                         <img
-                          src={item.icon_url} 
+                          src={item.icon_url}
                           alt={item.name}
                           className="h-10 w-10 rounded-full object-cover"
                         />
@@ -121,15 +114,16 @@ function SharedSummary() {
                   ))
                 )}
               </tbody>
-              {/* TOTAL row */}
               <tfoot>
                 <tr>
                   <td colSpan={4} className="px-6 py-4 text-right font-bold">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-400 h3 px-6">
-                {/* Total */}
-              </span>
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-400 h3 px-6">
+                      Total
+                    </span>
                   </td>
-                  <td className="px-6 py-4 font-bold bg-gradient-to-r from-purple-500 to-pink-400 rounded-b-lg text-white">{totalPrice}</td>
+                  <td className="px-6 py-4 font-bold bg-gradient-to-r from-purple-500 to-pink-400 rounded-b-lg text-white">
+                    {totalPrice}
+                  </td>
                 </tr>
               </tfoot>
             </table>

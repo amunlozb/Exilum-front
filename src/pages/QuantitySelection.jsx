@@ -41,7 +41,7 @@ function QuantitySelection() {
         quantity: quantities[item.name],
         icon_url: item.icon_url 
       })),
-      mapDeviceCraft: selectedItems.mapDeviceCraft.map((item) => ({
+      mapDeviceCrafts: selectedItems.mapDeviceCrafts.map((item) => ({
         name: item.name,
         quantity: quantities[item.name],
         icon_url: item.icon_url 
@@ -75,7 +75,7 @@ function QuantitySelection() {
 
   const selectedScarabs = selectedItems.scarabs || [];
   const selectedDeliriumOrbs = selectedItems.deliriumOrbs || [];
-  const selectedMapDeviceCraft = selectedItems.mapDeviceCraft || [];
+  const selectedMapDeviceCrafts = selectedItems.mapDeviceCrafts || [];
   const selectedMaps = selectedItems.maps || [];
   const selectedCraftingMaterials = selectedItems.craftingMaterials || [];
 
@@ -118,7 +118,7 @@ function QuantitySelection() {
             />
             <ItemCategory
               categoryTitle="Map Device Craft"
-              items={selectedMapDeviceCraft}
+              items={selectedMapDeviceCrafts}
               hasInput={false}
               showImage={false}
             />

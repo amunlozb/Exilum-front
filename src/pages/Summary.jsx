@@ -9,6 +9,7 @@ import root_url from "../const/root_url";
 function Summary() {
   const location = useLocation();
   const { prices } = location.state;
+  console.log(prices);
 
   const calculateTotalPrice = () => {
     let total = 0;
