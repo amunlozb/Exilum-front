@@ -191,7 +191,7 @@ function SignIn() {
                     ></div>
                   </div>
                   <form>
-                    <div className="flex flex-wrap -mx-3 mb-3">
+                    {/* <div className="flex flex-wrap -mx-3 mb-3">
                       <div className="w-full px-3">
                         <button className="btn px-0 text-white dark:border dark:border-white bg-gray-900 hover:bg-gray-800 w-full relative flex items-center">
                           <svg
@@ -206,7 +206,7 @@ function SignIn() {
                           </span>
                         </button>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="flex flex-wrap -mx-3">
                       <div className="w-full px-3">
                         <button
