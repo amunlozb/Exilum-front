@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { Flowbite, Spinner, Label } from "flowbite-react";
+import { useParams, Link, useLocation } from "react-router-dom";
+import { Flowbite, Spinner, Label, Button } from "flowbite-react";
+import { FaLink } from "react-icons/fa";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
 import axios from "axios";
 import root_url from "../const/root_url";
 
-function SharedSummary() {
-  const { uuid } = useParams();
-  const [prices, setPrices] = useState(null);
-  const [loading, setLoading] = useState(true);
+function Summary() {
+  const location = useLocation();
+  const { prices: initialPrices } = location.state || {}; 
+  const [prices, setPrices] = useState(initialPrices || {});
   const [mapMultiplier, setMapMultiplier] = useState(1);
+
+  const { uuid } = useParams(); 
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get(`${root_url}/api/share/${uuid}`);
-        setPrices(response.data);
-      } catch (error) {
-        console.error("Error fetching shared data:", error);
-      } finally {
-        setLoading(false);
+      if (uuid) { 
+        try {
+          const response = await axios.get(`${root_url}/api/share/${uuid}`);
+          setPrices(response.data);
+        } catch (error) {
+          console.error("Error fetching shared data:", error);
+        }
       }
     };
     fetchData();
@@ -44,6 +47,23 @@ function SharedSummary() {
     setMapMultiplier(Math.max(1, mapMultiplier - 1));
   };
 
+
+  const handleShareClick = async () => {
+    try {
+      const button = document.getElementById("shareButton");
+      // Change button text and icon immediately
+      button.innerHTML = '<FaCheck className="mr-2 h-5 w-5" /><span className="text-lg">Link Copied</span>';
+      const shareLink = `${window.location}`;
+  
+      
+      navigator.clipboard.writeText(shareLink);
+    } catch (error) {
+      console.error("Error creating share link:", error);
+    }
+  };
+  
+
+
   return (
     <Flowbite>
       <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900 dark:text-white">
@@ -51,7 +71,7 @@ function SharedSummary() {
         <main className="flex flex-col my-20 gap-10 items-center text-center">
           <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold py-5">Summary</h2>
-            {loading ? (
+            {Object.keys(prices).length === 0 ? ( 
               <div className="flex justify-center items-center py-5">
                 <Spinner
                   aria-label="Spinner button example"
@@ -122,18 +142,30 @@ function SharedSummary() {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
                             {(
-                              item.price *
-                              item.quantity *
-                              mapMultiplier
+                              item.price * item.quantity * mapMultiplier
                             ).toFixed(2)}
                           </td>
                         </tr>
                       ))
                     )}
                   </tbody>
+
+                  {/* TOTAL row */}
+                  <tfoot>
+                    <tr>
+                      <td colSpan={4} className="px-6 py-4 text-right font-bold">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-400 h3 px-6">
+                          Total
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 font-bold bg-gradient-to-r from-purple-500 to-pink-400 rounded-b-lg text-white">
+                        {calculateTotalPrice()}
+                      </td>
+                    </tr>
+                  </tfoot>
                 </table>
 
-                <div className="flex w-full mb-6 gap-72 justify-around align-middle items-center">
+                <div className="flex w-full mb-6 justify-start align-middle items-end ml-20 gap-24">
                   {/* Bulk Label and Inputs */}
                   <div>
                     <div className="mb-2 block">
@@ -196,17 +228,12 @@ function SharedSummary() {
                       </button>
                     </div>
                   </div>
-                  
-                  {/* Total and Total value */}
-                  <div className="self-end  align-middle items-center justify-around text-center p-2 shadow-xl shadow-pink-300 rounded-xl bg-white">
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-400 h2 mr-5 ">
-                      Total
+                  <Button gradientDuoTone="greenToBlue" onClick={handleShareClick}>
+                    <FaLink className="mr-2 h-5 w-5"/>
+                    <span className="text-lg" id="shareButton">
+                      Copy link
                     </span>
-                    <span className="h2 font-extrabold">
-                      {calculateTotalPrice()}
-                    </span>
-                  </div>
-
+                  </Button>
                 </div>
               </>
             )}
@@ -218,4 +245,4 @@ function SharedSummary() {
   );
 }
 
-export default SharedSummary;
+export default Summary;
