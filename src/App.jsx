@@ -21,6 +21,9 @@ import Tests from './pages/Tests';
 import QuantitySelection from './pages/QuantitySelection';
 import Summary from "./pages/Summary";
 import AdminStats from "./partials/admin/AdminStats"
+import AdminData from "./partials/admin/AdminData"
+import AdminUsers from "./partials/admin/AdminUsers"
+import SharedSummary from './pages/SharedSummary';
 
 function App() {  
 
@@ -52,10 +55,13 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/admin/dashboard" element={<Admin />} />
         <Route path="/admin/stats" element={<AdminStats />} />
-        <Route path="/tests" element={<Tests />} />
+        <Route path="/admin/data" element={<AdminData />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/quantity-selection" element={<QuantitySelection/>} />
         <Route path="/summary" element={<Summary />} />
-      </Routes>
+        <Route path="/shared/:uuid" element={<SharedSummary />} />      
+        
+        </Routes>
     </>
   );
 }

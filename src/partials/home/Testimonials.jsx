@@ -12,8 +12,7 @@ function Testimonials() {
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
             <h2 className="h2 mb-4 dark:text-white">Trusted by many dedicated players from all over the world</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400" data-aos="zoom-y-out">Arcu cursus vitae congue mauris rhoncus viverra nibh cras pulvinar mattis
-                blandit libero cursus mattis.</p>
+            <p className="text-xl text-gray-600 dark:text-gray-400" data-aos="zoom-y-out">Path of Exile veterans choose to use Exilum instead of having to <br/>keep up with outdated spreadsheets.</p>
           </div>
 
           {/* Testimonials */}
@@ -29,7 +28,7 @@ function Testimonials() {
                   <img className="relative rounded-full" src={TestimonialImage} width="96" height="96" alt="Testimonial 01" />
                 </div>
                 <blockquote className="text-xl font-medium mb-4 dark:text-white text-pretty">
-                  “I love this product and would recommend it to anyone. Couldn't be easier to use, it saved me countless hours of calculations “
+                  “I love this product and would recommend it to anyone. It's really intuitive and saved me countless hours of calculations “
                 </blockquote>
                 <cite className="block font-bold text-lg dark:text-white not-italic">Brignirs Garf</cite>
                 <div className="text-slate-500 dark:text-slate-400">

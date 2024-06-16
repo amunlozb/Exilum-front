@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Flowbite, Button, Label, Spinner } from "flowbite-react";
+import { useParams, Link, useLocation } from "react-router-dom";
+import { Flowbite, Spinner, Label, Button } from "flowbite-react";
 import { FaLink } from "react-icons/fa";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
-import axios from 'axios';
+import axios from "axios";
 import root_url from "../const/root_url";
-import { getAuth } from "firebase/auth"; // Import Firebase auth
 
 function Summary() {
   const location = useLocation();
-  const navigate = useNavigate();
-  const { prices } = location.state || { prices: {} };
+  const { prices: initialPrices } = location.state || {}; 
+  const [prices, setPrices] = useState(initialPrices || {});
   const [mapMultiplier, setMapMultiplier] = useState(1);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const { uuid } = useParams(); 
 
   useEffect(() => {
-    // Get the current user from Firebase
-    const auth = getAuth();
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsLoggedIn(!!user); // User is logged in if not null
-    });
-
-    // Clean up the listener when the component unmounts
-    return () => unsubscribe();
-  }, []);
+    const fetchData = async () => {
+      if (uuid) { 
+        try {
+          const response = await axios.get(`${root_url}/api/share/${uuid}`);
+          setPrices(response.data);
+        } catch (error) {
+          console.error("Error fetching shared data:", error);
+        }
+      }
+    };
+    fetchData();
+  }, [uuid]);
 
   const calculateTotalPrice = () => {
     let total = 0;
@@ -44,26 +47,22 @@ function Summary() {
     setMapMultiplier(Math.max(1, mapMultiplier - 1));
   };
 
+
   const handleShareClick = async () => {
-    if (!isLoggedIn) {
-      navigate("/signin");
-      return;
-    }
-
     try {
-      // Change button text
       const button = document.getElementById("shareButton");
+      // Change button text and icon immediately
       button.innerHTML = '<FaCheck className="w-5 h-5 mr-2" /><span className="text-lg">Link Copied</span>';
-      // Link logic
-      const response = await axios.post(`${root_url}/api/share`, prices);
-      const shareUUID = response.data;
-      const shareLink = `${window.location.origin}/shared/${shareUUID}`;
+      const shareLink = `${window.location}`;
+  
+      
       navigator.clipboard.writeText(shareLink);
-
     } catch (error) {
       console.error("Error creating share link:", error);
     }
   };
+  
+
 
   return (
     <Flowbite>
@@ -72,7 +71,7 @@ function Summary() {
         <main className="flex flex-col items-center gap-10 my-20 text-center">
           <div className="container px-4 mx-auto">
             <h2 className="py-5 text-4xl font-bold">Summary</h2>
-            {Object.keys(prices).length === 0 ? (
+            {Object.keys(prices).length === 0 ? ( 
               <div className="flex items-center justify-center py-5">
                 <Spinner
                   aria-label="Spinner button example"
@@ -88,13 +87,39 @@ function Summary() {
                 <table className="min-w-full border-gray-800 divide-y divide-gray-400 rounded-lg">
                   <thead className="bg-gray-50 dark:bg-gray-800 dark:border-white">
                     <tr>
-                      <th className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200">Image</th>
-                      <th className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200">Name</th>
-                      <th className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200">Quantity</th>
-                      <th className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200">Price Per Unit</th>
-                      <th className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200">Total Price</th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200"
+                      >
+                        Image
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200"
+                      >
+                        Name
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200"
+                      >
+                        Quantity
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200"
+                      >
+                        Price Per Unit
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-4 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200"
+                      >
+                        Total Price
+                      </th>
                     </tr>
                   </thead>
+
                   <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
                     {Object.entries(prices).map(([category, items]) =>
                       items.map((item) => (
@@ -116,15 +141,19 @@ function Summary() {
                             {item.price.toFixed(2)}
                           </td>
                           <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">
-                            {(item.price * item.quantity * mapMultiplier).toFixed(2)}
+                            {(
+                              item.price * item.quantity * mapMultiplier
+                            ).toFixed(2)}
                           </td>
                         </tr>
                       ))
                     )}
                   </tbody>
+
+                  {/* TOTAL row */}
                   <tfoot>
                     <tr>
-                      <td colSpan="3" className="px-6 py-4 text-left">
+                    <td colSpan="3" className="px-6 py-4 text-left">
                         <div className="flex items-end justify-start w-full gap-40 align-middle">
                           {/* Bulk Label and Inputs */}
                           <div className="flex items-center">
@@ -180,7 +209,7 @@ function Summary() {
                           <Button gradientDuoTone="greenToBlue" onClick={handleShareClick} className="flex items-center">
                             <FaLink className="w-5 h-5 mr-2" />
                             <span className="text-lg" id="shareButton">
-                              {isLoggedIn ? "Copy link" : "Log in to share"}
+                              Copy link
                             </span>
                           </Button>
                         </div>
@@ -192,8 +221,10 @@ function Summary() {
                         {calculateTotalPrice()}
                       </td>
                     </tr>
+                    
                   </tfoot>
                 </table>
+                 
               </>
             )}
           </div>

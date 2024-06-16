@@ -66,7 +66,7 @@ function AdminPanel() {
                         </a>
 
                         {/* 2nd item */}
-                        <a href="/manage-products" className="relative flex flex-col items-center p-6 bg-white dark:bg-gray-900 rounded shadow-xl border-2 border-gray-300 dark:border-gray-700 hover:bg-gray-200 active:bg-gray-300 dark:active:bg-gray-800">
+                        <a href="/admin/data" className="relative flex flex-col items-center p-6 bg-white dark:bg-gray-900 rounded shadow-xl border-2 border-gray-300 dark:border-gray-700 hover:bg-gray-200 active:bg-gray-300 dark:active:bg-gray-800">
                             <svg
                                 className="w-16 h-16 p-1 -mt-1 mb-2"
                                 viewBox="0 0 64 64"
@@ -99,15 +99,15 @@ function AdminPanel() {
                                 </g>
                             </svg>
                             <h4 className="text-xl font-bold leading-snug dark:text-white tracking-tight mb-1">
-                                Manage Products
+                                Manage Data
                             </h4>
                             <p className="text-gray-600 dark:text-gray-400 text-center">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Take control over the prices and entities of the database.
                             </p>
                         </a>
 
                         {/* 3rd item */}
-                        <a href="/test3" className="relative flex flex-col items-center p-6 bg-white dark:bg-gray-900 rounded shadow-xl border-2 border-gray-300 dark:border-gray-700 hover:bg-gray-200 active:bg-gray-300 dark:active:bg-gray-800">
+                        <a href="/admin/users" className="relative flex flex-col items-center p-6 bg-white dark:bg-gray-900 rounded shadow-xl border-2 border-gray-300 dark:border-gray-700 hover:bg-gray-200 active:bg-gray-300 dark:active:bg-gray-800">
                             <svg
                                 className="w-16 h-16 p-1 -mt-1 mb-2"
                                 viewBox="0 0 64 64"
@@ -133,10 +133,10 @@ function AdminPanel() {
                                 </g>
                             </svg>
                             <h4 className="text-xl font-bold leading-snug dark:text-white tracking-tight mb-1">
-                                Manage Orders
+                                Manage Users
                             </h4>
                             <p className="text-gray-600 dark:text-gray-400 text-center">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Access all the commands to create, update and delete users.
                             </p>
                         </a>
                     </div>
