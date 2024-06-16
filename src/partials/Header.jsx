@@ -70,11 +70,11 @@ function Header() {
         !top && "bg-white dark:bg-gray-900 backdrop-blur-sm shadow-lg dark:shadow-black"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-5 sm:px-6">
+      <div className="max-w-6xl px-5 mx-auto sm:px-6">
         <Navbar rounded className="dark:bg-gray-900">
           <Navbar.Brand as={Link} to="/">
             <svg
-              className="w-8 h-8"
+              className="w-7 h-7"
               viewBox="0 0 32 32"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -109,18 +109,9 @@ function Header() {
               <>
                 <Navbar.Link
                   href="/admin/dashboard"
-                  className="md:text-lg text-purple-700 dark:text-purple-500 hover:text-gray-900 dark:hover:text-gray-500
-                    md:px-5 md:py-3 transition duration-150 ease-in-out text-2xl"
+                  className="text-2xl text-purple-700 transition duration-150 ease-in-out md:text-lg dark:text-purple-500 hover:text-gray-900 dark:hover:text-gray-500 md:px-5 md:py-3"
                 >
-                  Dashboard
-                </Navbar.Link>
-
-                <Navbar.Link
-                  href="/admin/users"
-                  className="md:text-lg text-purple-700 dark:text-purple-500 hover:text-gray-900 dark:hover:text-gray-500
-                    md:px-5 md:py-3 transition duration-150 ease-in-out text-2xl"
-                >
-                  Users
+                  Admin Dashboard
                 </Navbar.Link>
               </>
             )}
@@ -128,18 +119,9 @@ function Header() {
             {/* Regular links */}
             <Navbar.Link
               href="/investments"
-              className="md:text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500
-                    md:px-5 md:py-3 transition duration-150 ease-in-out text-2xl"
+              className="text-2xl text-gray-600 transition duration-150 ease-in-out md:text-lg dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500 md:px-5 md:py-3"
             >
               Investments
-            </Navbar.Link>
-
-            <Navbar.Link
-              href="/tests"
-              className="md:text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500
-                    md:px-5 md:py-3 transition duration-150 ease-in-out text-2xl"
-            >
-              Tests
             </Navbar.Link>
 
             {/* Auth links */}
@@ -167,20 +149,18 @@ function Header() {
               <>
                 <Navbar.Link
                   href="/signin"
-                  className="md:text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500
-                        md:px-5 md:py-3 transition duration-150 ease-in-out text-2xl"
+                  className="text-2xl text-gray-600 transition duration-150 ease-in-out md:text-lg dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500 md:px-5 md:py-3"
                 >
                   Sign in
                 </Navbar.Link>
 
                 <Navbar.Link
                   href="/signup"
-                  className="md:text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500
-                        md:px-5 md:py-3 transition duration-150 ease-in-out flex items-center text-2xl"
+                  className="flex items-center text-2xl text-gray-600 transition duration-150 ease-in-out md:text-lg dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-500 md:px-5 md:py-3"
                 >
                   Sign up
                   <svg
-                    className="w-3 h-3 fill-current text-gray-800 dark:text-gray-300 flex-shrink-0 ml-2 -mr-1"
+                    className="flex-shrink-0 w-3 h-3 ml-2 -mr-1 text-gray-800 fill-current dark:text-gray-300"
                     viewBox="0 0 12 12"
                     xmlns="http://www.w3.org/2000/svg"
                   >

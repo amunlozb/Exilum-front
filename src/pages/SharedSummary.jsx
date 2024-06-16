@@ -52,7 +52,7 @@ function Summary() {
     try {
       const button = document.getElementById("shareButton");
       // Change button text and icon immediately
-      button.innerHTML = '<FaCheck className="mr-2 h-5 w-5" /><span className="text-lg">Link Copied</span>';
+      button.innerHTML = '<FaCheck className="w-5 h-5 mr-2" /><span className="text-lg">Link Copied</span>';
       const shareLink = `${window.location}`;
   
       
@@ -68,11 +68,11 @@ function Summary() {
     <Flowbite>
       <div className="flex flex-col min-h-screen overflow-hidden dark:bg-gray-900 dark:text-white">
         <Header />
-        <main className="flex flex-col my-20 gap-10 items-center text-center">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold py-5">Summary</h2>
+        <main className="flex flex-col items-center gap-10 my-20 text-center">
+          <div className="container px-4 mx-auto">
+            <h2 className="py-5 text-4xl font-bold">Summary</h2>
             {Object.keys(prices).length === 0 ? ( 
-              <div className="flex justify-center items-center py-5">
+              <div className="flex items-center justify-center py-5">
                 <Spinner
                   aria-label="Spinner button example"
                   size="lg"
@@ -84,63 +84,63 @@ function Summary() {
               </div>
             ) : (
               <>
-                <table className="min-w-full divide-y divide-gray-400 border-gray-800 rounded-lg">
+                <table className="min-w-full border-gray-800 divide-y divide-gray-400 rounded-lg">
                   <thead className="bg-gray-50 dark:bg-gray-800 dark:border-white">
                     <tr>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider"
+                        className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200"
                       >
                         Image
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider"
+                        className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200"
                       >
                         Name
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider"
+                        className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200"
                       >
                         Quantity
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider"
+                        className="px-6 py-3 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200"
                       >
                         Price Per Unit
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-4 text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider"
+                        className="px-6 py-4 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-200"
                       >
                         Total Price
                       </th>
                     </tr>
                   </thead>
 
-                  <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
                     {Object.entries(prices).map(([category, items]) =>
                       items.map((item) => (
                         <tr key={item.name}>
-                          <td className="px-6 py-4 whitespace-nowrap flex justify-center">
+                          <td className="flex justify-center px-6 py-4 whitespace-nowrap">
                             <img
                               src={item.icon_url}
                               alt={item.name}
-                              className="h-10 w-10 rounded-full object-cover"
+                              className="object-cover w-10 h-10 rounded-full"
                             />
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-md text-gray-900 dark:text-white">
+                          <td className="px-6 py-4 text-gray-900 whitespace-nowrap text-md dark:text-white">
                             {item.name}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
+                          <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-200">
                             {item.quantity * mapMultiplier}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
+                          <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-200">
                             {item.price.toFixed(2)}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
+                          <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">
                             {(
                               item.price * item.quantity * mapMultiplier
                             ).toFixed(2)}
@@ -153,88 +153,78 @@ function Summary() {
                   {/* TOTAL row */}
                   <tfoot>
                     <tr>
-                      <td colSpan={4} className="px-6 py-4 text-right font-bold">
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-400 h3 px-6">
-                          Total
-                        </span>
+                    <td colSpan="3" className="px-6 py-4 text-left">
+                        <div className="flex items-end justify-start w-full gap-40 align-middle">
+                          {/* Bulk Label and Inputs */}
+                          <div className="flex items-center">
+                            <Label htmlFor="map-multiplier" value="Bulk Amount" className="mr-2" />
+                            <button
+                              type="button"
+                              onClick={handleMultiplierDecrease}
+                              className="h-10 p-2 bg-gray-200 border border-gray-300 rounded-l-lg dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                            >
+                              <svg
+                                className="w-4 h-4 text-gray-900 dark:text-white"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 18 2"
+                              >
+                                <path
+                                  stroke="currentColor"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M1 1h16"
+                                />
+                              </svg>
+                            </button>
+                            <input
+                              type="text"
+                              value={mapMultiplier}
+                              onChange={(e) => setMapMultiplier(Number(e.target.value))}
+                              className="w-12 font-bold text-center border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-white dark:bg-black"
+                            />
+                            <button
+                              type="button"
+                              onClick={handleMultiplierIncrease}
+                              className="h-10 p-2 bg-gray-200 border border-gray-300 rounded-r-lg dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                            >
+                              <svg
+                                className="w-4 h-4 text-gray-900 dark:text-white"
+                                aria-hidden="true"
+                                fill="none"
+                                viewBox="0 0 18 18"
+                              >
+                                <path
+                                  stroke="currentColor"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M9 1v16M1 9h16"
+                                />
+                              </svg>
+                            </button>
+                          </div>
+                          <Button gradientDuoTone="greenToBlue" onClick={handleShareClick} className="flex items-center">
+                            <FaLink className="w-5 h-5 mr-2" />
+                            <span className="text-lg" id="shareButton">
+                              Copy link
+                            </span>
+                          </Button>
+                        </div>
                       </td>
-                      <td className="px-6 py-4 font-bold bg-gradient-to-r from-purple-500 to-pink-400 rounded-b-lg text-white">
+                      <td className="px-6 py-4 font-bold text-right">
+                        <span className="px-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-400 h3">Total</span>
+                      </td>
+                      <td className="px-6 py-4 font-bold text-white rounded-b-lg bg-gradient-to-r from-purple-500 to-pink-400">
                         {calculateTotalPrice()}
                       </td>
                     </tr>
+                    
                   </tfoot>
                 </table>
-
-                <div className="flex w-full mb-6 justify-start align-middle items-end ml-20 gap-24">
-                  {/* Bulk Label and Inputs */}
-                  <div>
-                    <div className="mb-2 block">
-                      <Label htmlFor="map-multiplier" value="Bulk Amount" />
-                    </div>
-
-                    <div className="flex items-center rounded-lg justify-center">
-                      {/* Decrease Button */}
-                      <button
-                        type="button"
-                        onClick={handleMultiplierDecrease}
-                        className="bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-l-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
-                      >
-                        <svg
-                          className="w-3 h-3 text-gray-900 dark:text-white"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 18 2"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M1 1h16"
-                          />
-                        </svg>
-                      </button>
-
-                      <input
-                        type="text"
-                        value={mapMultiplier}
-                        onChange={(e) =>
-                          setMapMultiplier(Number(e.target.value))
-                        }
-                        className="w-12 text-center font-bold border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-white dark:bg-black"
-                      />
-
-                      {/* Increase Button */}
-                      <button
-                        type="button"
-                        onClick={handleMultiplierIncrease}
-                        className={`bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-r-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none `}
-                      >
-                        <svg
-                          className="w-3 h-3 text-gray-900 dark:text-white"
-                          aria-hidden="true"
-                          fill="none"
-                          viewBox="0 0 18 18"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 1v16M1 9h16"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                  <Button gradientDuoTone="greenToBlue" onClick={handleShareClick}>
-                    <FaLink className="mr-2 h-5 w-5"/>
-                    <span className="text-lg" id="shareButton">
-                      Copy link
-                    </span>
-                  </Button>
-                </div>
+                 
               </>
             )}
           </div>
