@@ -18,9 +18,8 @@ function FeaturesBlocks() {
               works
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
-              cupidatat.
+              Here is an intuitive breakdown of the steps you need to take to get started with 
+              Exilum, take a look at the different functionalities and explore the app.
             </p>
           </div>
 
@@ -66,7 +65,7 @@ function FeaturesBlocks() {
                 Sign in
               </h4>
               <p className="text-gray-600 dark:text-gray-400 text-center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                You can also create an account if you don't already have one
               </p>
             </div>
 
@@ -107,7 +106,7 @@ function FeaturesBlocks() {
                 Explore the app
               </h4>
               <p className="text-gray-600 dark:text-gray-400 text-center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Take a look at the different functionalities
               </p>
             </div>
 
@@ -141,7 +140,7 @@ function FeaturesBlocks() {
                 Plan Ahead
               </h4>
               <p className="text-gray-600 dark:text-gray-400 text-center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Have a strategy in mind before accessing the Investments
               </p>
             </div>
 
@@ -188,7 +187,7 @@ function FeaturesBlocks() {
                   Check your investments
               </h4>
               <p className="text-gray-600 dark:text-gray-400 text-center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Input all your desired data into the investments tab
               </p>
             </div>
 
@@ -222,7 +221,7 @@ function FeaturesBlocks() {
                 Let the calculations happen
               </h4>
               <p className="text-gray-600 dark:text-gray-400 text-center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Sit back and enjoy while we take care of the calculations
               </p>
             </div>
 
@@ -265,7 +264,7 @@ function FeaturesBlocks() {
                 Check the results
               </h4>
               <p className="text-gray-600 dark:text-gray-400 text-center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                View the summary breakdown of your selected strategy.
               </p>
             </div>
           </div>

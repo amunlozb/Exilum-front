@@ -13,7 +13,7 @@ function Investments() {
   const [selectedScarabs, setSelectedScarabs] = useState([]);
   const [selectedDeliriumOrbs, setSelectedDeliriumOrbs] = useState([]);
   const [selectedMaps, setSelectedMaps] = useState([]);
-  const [selectedMapDeviceCraft, setSelectedMapDeviceCraft] = useState([]);
+  const [selectedMapDeviceCrafts, setSelectedMapDeviceCrafts] = useState([]);
   const [selectedCraftingMaterials, setSelectedCraftingMaterials] = useState([]);
   const [scarabs, setScarabs] = useState([]);
   const [maps, setMaps] = useState([]);
@@ -95,7 +95,7 @@ function Investments() {
         name,
         icon_url: deliriumOrbs.find(item => item.name === name).icon_url
       })),
-      mapDeviceCraft: selectedMapDeviceCraft.map(name => ({
+      mapDeviceCrafts: selectedMapDeviceCrafts.map(name => ({
         name,
         icon_url: deviceCrafts.find(item => item.name === name).icon_url
       })),
@@ -124,8 +124,8 @@ function Investments() {
     setSelectedDeliriumOrbs(selected);
   }, []);
 
-  const handleMapDeviceCraftChange = useCallback((selected) => {
-    setSelectedMapDeviceCraft(selected);
+  const handleMapDeviceCraftsChange = useCallback((selected) => {
+    setSelectedMapDeviceCrafts(selected);
   }, []);
 
   const handleMapChange = useCallback((selected) => {
@@ -165,7 +165,7 @@ function Investments() {
               hasSearch={true}
               content={deviceCrafts}
               limit={1}
-              onSelectionChange={handleMapDeviceCraftChange}
+              onSelectionChange={handleMapDeviceCraftsChange}
             />
             <SelectableInvestmentGroup
               title="Crafting Materials"
