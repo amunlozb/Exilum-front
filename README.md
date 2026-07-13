@@ -1,11 +1,5 @@
 # Exilum
 
-#### Curso Escolar 2023-2024
-#### Autor: [Ángel Muñoz Lozano](https://github.com/amunlozb/)
-#### Tutor: [Juan Pablo Domínguez Mayo](https://github.com/profeinformatica101)
-#### Fecha de Inicio: 25-03-2024
-#### Fecha de Finalización: 21-06-2024
-
 ## Breve descripción del proyecto
 
 La propuesta de valor de este proyecto reside en la simplificación del proceso de realizar planificaciones económicas en el videojuego  
